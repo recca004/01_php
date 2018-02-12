@@ -7,7 +7,7 @@ if( isset( $datas[ 'articles' ] ) )
     {
     ?>
         <article>
-            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=details&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a></h2>
+            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a></h2>
             <p>
                 <?php echo $row[ 'IntroArticle' ]; ?>
             </p>

@@ -8,7 +8,7 @@
     <body>
         <div id="page">
             <main>
-                <?php include SITE_PATH . '/view/articles/articles.php'; ?>
+                <?php include SITE_PATH . '/view/articles/'.$datas['view'].'.php'; ?>
             </main>
         </div>
     </body>

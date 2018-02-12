@@ -36,3 +36,16 @@ function article( $id )
     
     return $datas;
 }
+
+switch ($action){
+    case 'detail':
+        $datas=article($_GET['id']);
+        
+        break;
+
+        
+     
+    default :
+        $datas=  articles();
+        break;
+}
