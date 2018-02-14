@@ -1,6 +1,4 @@
-/nbproject/private/
-nbproject/project.properties
-nbproject/project.xml
-nbprojectl/private/private.properties
-nbprojectl/project.properties
-nbprojectl/project.xml
+/_db
+/00_DOCUMENTATION/*
+README.md
+/01_EXOS/nbproject/*
