@@ -3,13 +3,13 @@
 class Controller{
 
     private $_page;
-    private $_contact;
+    private $_action;
     private $_view;
     private $_datas;
     
     public function __construct($page, $action){
-        $this->_page=$page;
-        $this->_action=$action;
+        $this->_page = $page;
+        $this->_action = $action;
         $this->_setDatas();
     }
     
@@ -19,7 +19,7 @@ class Controller{
         
         switch ($this->_action){
             case 'send':
-                $this->_datas = $this->_checkMessageSent();
+                $this->_datas = $this->_checkMessageSent( $this->_action );
                 break;
                 
             default :
@@ -31,11 +31,11 @@ class Controller{
     
     
      
-private function _checkMessageSent()
+private function _checkMessageSent($action)
 {
     $datas = array();
     
-    if($this->_action === 'send' )
+    if($action === 'send' )
     {
         $datas = $_POST;
 
@@ -75,23 +75,7 @@ private function _checkMessageSent()
     return $datas;
 }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        public function get_Datas(){
+    public function get_Datas(){
         return $this->_datas;
     }
 }

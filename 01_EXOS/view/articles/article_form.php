@@ -1,6 +1,10 @@
+<?php 
+
+
+?>
 <h1>Articles</h1>
 
-<form action="<?php echo SITE_URL; ?>/articles/add" method="post">
+<form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=insert" method="post">
     <label for="TitleArticle">
         <?php echo ( isset( $datas[ 'error' ][ 'titleempty' ] ) ) ? '<span class="alert">Aucun titre n\'a été indiqué.</span><br />' : ''; ?>
         <input type="text" name="TitleArticle" id="TitleArticle" value="<?php echo ( isset( $datas['TitleArticle'] ) ) ? $datas['TitleArticle'] : ''; ?>" placeholder="Titre de l'article" />

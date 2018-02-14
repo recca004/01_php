@@ -12,7 +12,8 @@ $action=(isset($_GET['action'])) ? $_GET['action'] : '';
 include SITE_PATH . '/includes/Db.php';
 include SITE_PATH . '/application/'.$page.'/Controller.php';
 
-$Controller=new Controller($page, $action);
+$Controller = new Controller($page, $action);
+
 $datas=$Controller->get_Datas();
 
 
