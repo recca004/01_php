@@ -13,7 +13,7 @@
                 <menu>
                     <h2>
                     <a href="<?php echo SITE_URL . '/index.php?page=contact';?>">Contact</a>
-                    <a href="<?php echo SITE_URL . '/index.php?page=article';?>">Article</a>
+                    <a href="<?php echo SITE_URL . '/index.php?page=articles';?>">Articles</a>
                     </h2>
                 </menu>
                 <?php include SITE_PATH . '/view/'.$datas['view'].'.php'; ?>

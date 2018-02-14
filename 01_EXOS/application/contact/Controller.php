@@ -21,12 +21,13 @@ class Controller{
         
         switch ($this->_action){
             case 'detail':
-                $this->_datas=$this->_article($_GET['id']);
+                
                 break;
             case 'insert':
                 
             default :
-                $this->_datas=  $this->_articles();
+               $this->_datas['view'] = 'contact/contact';
+                
                 break;
         }
     }
