@@ -20,27 +20,25 @@ class Controller{
     private function _setDatas(){
         
         switch ($this->_action){
-            case 'detail':
-                
+            case 'send':
+                $this->_datas=$this->_checkMessageSent();
                 break;
-            case 'insert':
-                
             default :
-               $this->_datas['view'] = 'contact/contact';
-                
+                $this->_datas['view'] = 'contact/contact';
                 break;
         }
     }
           public function get_Datas(){
         return $this->_datas;
     }
-    }
-
-function checkMessageSent( $action )
-{
+    
+    private function _checkMessageSent()
+    {
     $datas = array();
     
-    if($action === 'send' )
+    
+    
+    if($this->_action === 'send' )
     {
         $datas = $_POST;
 
@@ -63,17 +61,20 @@ function checkMessageSent( $action )
             // send message by mail
             // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
             
-            $datas[ 'view' ] = 'contact_sent';
+            $datas[ 'view' ] = 'contact/contact_sent';
         }
         else
         {
-            $datas[ 'view' ] = 'contact';
+            $datas[ 'view' ] = 'contact/contact';
         }
     }
     else
     {
-        $datas[ 'view' ] = 'contact';
+        $datas[ 'view' ] = 'contact/contact';
     }
     
     return $datas;
 }
+
+}
+
