@@ -15,5 +15,4 @@ include SITE_PATH . '/application/'.$page.'/Controller.php';
 $Controller=new Controller($page, $action);
 $datas=$Controller->get_Datas();
 
-echo "Adam";
 include SITE_PATH . '/view/page.php';

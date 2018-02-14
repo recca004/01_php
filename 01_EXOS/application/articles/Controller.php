@@ -5,33 +5,30 @@ class Controller{
     private $_action;
     private $_view;
     private $_datas;
-    
+
     public function __construct($page, $action){
         $this->_page=$page;
         $this->_action=$action;
         $this->_setDatas();
     }
-    
-    
-    
+
+
     private function _setDatas(){
-        
+
         switch ($this->_action){
             case 'detail':
                 $this->_datas=$this->_article($_GET['id']);
                 break;
+            case 'show':
+                $this->_datas['view'] = 'articles/article_form';
+                break;
             case 'insert':
-                
+                break;
             default :
                 $this->_datas=  $this->_articles();
                 break;
         }
     }
-
-
-
-
-
 
 
     private function _articles()
@@ -70,7 +67,6 @@ class Controller{
 
         return $datas;
     }
-
 
     public function get_Datas(){
         return $this->_datas;
