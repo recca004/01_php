@@ -1,10 +1,41 @@
 <?php
 
-function checkMessageSent( $action )
+class Controller{
+
+    private $_page;
+    private $_contact;
+    private $_view;
+    private $_datas;
+    
+    public function __construct($page, $action){
+        $this->_page=$page;
+        $this->_action=$action;
+        $this->_setDatas();
+    }
+    
+    
+    
+    private function _setDatas(){
+        
+        switch ($this->_action){
+            case 'send':
+                $this->_datas = $this->_checkMessageSent();
+                break;
+                
+            default :
+                $this->_datas['view'] = 'contact/contact';
+
+                break;
+        }
+    }
+    
+    
+     
+private function _checkMessageSent()
 {
     $datas = array();
     
-    if($action === 'send' )
+    if($this->_action === 'send' )
     {
         $datas = $_POST;
 
@@ -20,24 +51,52 @@ function checkMessageSent( $action )
         if( empty( $_POST[ 'message' ] ) )
         {
             $datas[ 'error' ][ 'messageempty' ] = true;
+          
         }
 
         if( !isset( $datas[ 'error' ] ) )
         {
-            // send message by mail
-            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+         //send message by mail
+          mail( 'bobunae@gmail.com', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
             
-            $datas[ 'view' ] = 'contact_sent';
+            $datas[ 'view' ] = 'contact/contact_sent';
         }
         else
         {
-            $datas[ 'view' ] = 'contact';
+            $datas[ 'view' ] = 'contact/contact';
         }
     }
     else
     {
-        $datas[ 'view' ] = 'contact';
+        $datas[ 'view' ] = 'contact/contact';
     }
     
+    var_dump($datas);
     return $datas;
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        public function get_Datas(){
+        return $this->_datas;
+    }
+}
+    
+    
+    
+    
+   
