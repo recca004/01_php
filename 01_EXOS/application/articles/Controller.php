@@ -11,9 +11,7 @@ class Controller{
         $this->_action=$action;
         $this->_setDatas();
     }
-    
-    
-    
+       
     private function _setDatas(){
         
         switch ($this->_action){
