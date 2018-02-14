@@ -1,5 +1,40 @@
 <?php
 
+
+
+class Controller{
+
+    private $_page;
+    private $_action;
+    private $_view;
+    private $_datas;
+    
+    public function __construct($page, $action){
+        $this->_page=$page;
+        $this->_action=$action;
+        $this->_setDatas();
+    }
+    
+    
+    
+    private function _setDatas(){
+        
+        switch ($this->_action){
+            case 'detail':
+                $this->_datas=$this->_article($_GET['id']);
+                break;
+            case 'insert':
+                
+            default :
+                $this->_datas=  $this->_articles();
+                break;
+        }
+    }
+          public function get_Datas(){
+        return $this->_datas;
+    }
+    }
+
 function checkMessageSent( $action )
 {
     $datas = array();
