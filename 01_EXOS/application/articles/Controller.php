@@ -21,7 +21,7 @@ class Controller{
                 $this->_datas=$this->_article($_GET['id']);
                 break;
             case 'insert':
-                
+                $this->_datas=_insertArticle();
             default :
                 $this->_datas=  $this->_articles();
                 break;
@@ -30,7 +30,16 @@ class Controller{
 
 
 
+// INSERT
+    private function _insertArticle(){
+	
+   $db = Db::connect();
+   
+    $statement=$db->prepare('INSERT INTO articles( TitleArticle, ContentArticle, DateArticle, AuthorArticle) VALUES( ?, ?, NOW(), ?)');
+    $statement->bind_param( 'sss', $_POST['TitreArticle'], $_POST['ContenuArticle'], $_POST['AuteurArticle'] );
+    $statement->execute();
 
+}
 
 
 
