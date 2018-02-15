@@ -1,6 +1,10 @@
+<nav>
+  <ul>
+    <li><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a></li>
+  </ul>
+</nav>
 <h1>Articles</h1>
-
-<?php 
+<?php
 if( isset( $datas[ 'articles' ] ) )
 {
     while( $row = $datas[ 'articles' ]->fetch_array() )
