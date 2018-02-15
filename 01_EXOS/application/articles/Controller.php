@@ -47,7 +47,7 @@ class Controller{
             $datas[ 'articles' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/articles';
+        $this->_view = 'articles/articles';
 
         return $datas;
     }
@@ -66,7 +66,7 @@ class Controller{
             $datas[ 'article' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/article_detail';
+        $this->_view = 'articles/article_detail';
 
         return $datas;
     }
@@ -75,4 +75,9 @@ class Controller{
     public function get_Datas(){
         return $this->_datas;
     }
+    
+    public function get_view()
+    {
+        return $this->_view;
+    }  
 }

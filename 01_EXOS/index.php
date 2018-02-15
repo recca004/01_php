@@ -14,5 +14,6 @@ include SITE_PATH . '/application/'.$page.'/Controller.php';
 
 $Controller=new Controller($page, $action);
 $datas=$Controller->get_Datas();
+$view = $Controller->get_view();
 
 include SITE_PATH . '/view/page.php';
