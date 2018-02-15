@@ -19,19 +19,22 @@ class Controller{
         
         switch ($this->_action){
             case 'send':
-                $this->_datas = $this->_checkMessageSent( $this->_action );
+                 $this->_checkMessageSent( );
                 break;
                 
             default :
-                $this->_datas['view'] = 'contact/contact';
+                $this->_view = 'contact/contact';
 
                 break;
         }
     }
     
-    
+    /**
+     * Vérifie les champs du formilaire et envoi l'email si aucune erreur n'est truvée
+     * @return string
+     */
      
-private function _checkMessageSent($action)
+private function _checkMessageSent()
 {
     $datas = array();
     
@@ -59,28 +62,35 @@ private function _checkMessageSent($action)
          //send message by mail
           mail( 'bobunae@gmail.com', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
             
-            $datas[ 'view' ] = 'contact/contact_sent';
+             $this->_view = 'contact/contact_sent';
         }
         else
         {
-            $datas[ 'view' ] = 'contact/contact';
+             $this->_view = 'contact/contact';
         }
     }
     else
     {
-        $datas[ 'view' ] = 'contact/contact';
+         $this->_view = 'contact/contact';
     }
     
-    var_dump($datas);
-    return $datas;
+    $this->_datas = $datas;
 }
     
     public function get_Datas(){
         return $this->_datas;
     }
-}
+
     
     
     
     
    
+public function get_view ()
+        
+{
+        return $this->_view;
+    
+    
+}
+}
