@@ -20,10 +20,8 @@ class Controller{
             case 'detail':
                 $this->_datas=$this->_article($_GET['id']);
                 break;
-            case 'show':
-                $this->_datas['view']='articles/article_form';
             default :
-                $this->_datas=  $this->_articles();
+                $this->_datas=$this->_articles();
                 break;
         }
     }
@@ -47,7 +45,7 @@ class Controller{
             $datas[ 'articles' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/articles';
+        $this->_view  = 'articles/articles';
 
         return $datas;
     }
@@ -66,7 +64,7 @@ class Controller{
             $datas[ 'article' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/article_detail';
+        $this->_view  = 'articles/article_detail';
 
         return $datas;
     }
@@ -83,13 +81,16 @@ class Controller{
         }
 
         //$datas[ 'view' ] = 'articles/article_form';
-         $datas=$this->_datas['view'] = 'contact/contact';
+         $datas=$this->_view  = 'contact/contact';
 
         return $datas;
     }
 
 
-    public function get_Datas(){
+    public function get_datas(){
         return $this->_datas;
+    }
+    public function get_view(){
+        return $this->_view;
     }
 }
