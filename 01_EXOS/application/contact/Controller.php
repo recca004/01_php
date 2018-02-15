@@ -1,21 +1,9 @@
 <?php
 
-class Controller{
+class Controller extends ControllerCommon{
 
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
     
-    public function __construct($page, $action){
-        $this->_page = $page;
-        $this->_action = $action;
-        $this->_setDatas();
-    }
-    
-    
-    
-    private function _setDatas(){
+    protected function _setDatas(){
         
         switch ($this->_action){
             case 'send':
@@ -77,20 +65,4 @@ private function _checkMessageSent()
     $this->_datas = $datas;
 }
     
-    public function get_Datas(){
-        return $this->_datas;
-    }
-
-    
-    
-    
-    
-   
-public function get_view ()
-        
-{
-        return $this->_view;
-    
-    
-}
 }

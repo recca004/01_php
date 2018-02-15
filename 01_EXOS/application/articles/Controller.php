@@ -1,27 +1,26 @@
 <?php
-class Controller{
+class Controller extends ControllerCommon{
 
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
-    
-    public function __construct($page, $action){
-        $this->_page=$page;
-        $this->_action=$action;
-        $this->_setDatas();
-    }
+  
     
     
     
-    private function _setDatas(){
+    protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
                 $this->_datas=$this->_article($_GET['id']);
                 break;
+            
             case 'show':
                 $this->_view='articles/article_form';
+                 break;
+             
+             
+             case 'insert':
+                $this->_insert();
+                 break;
+             
             default :
                 $this->_datas=  $this->_articles();
                 break;
@@ -89,13 +88,31 @@ class Controller{
     }
 
 
-    public function get_Datas(){
-        return $this->_datas;
+    
+    private function _insert()
+            
+    {
+        $datas = $_POST;
+        
+         $db = Db::connect();
+        
+        $TitleArticle = $db->real_escape_string($datas ['TitleArticle']);
+        $IntroArticle = $db->real_escape_string($datas ['IntroArticle']);
+        $ContentArticle = $db->real_escape_string($datas ['ContentArticle']);
+        
+        
+        $query = 'INSERT INTO articles  VALUES  (NULL, \''.$TitleArticle.'\',\''.$IntroArticle.'\',\''. $ContentArticle.'\' )';
+        
+        
+        
+        
+       $db->query ( $query );
+        
+        $this->_view = 'articles/articles';
+        $this->_datas = $this->_articles();
+        //$this->_view = 'articles/articles_form';
+        
     }
-
-   
-    public function get_view() {
-        return $this->_view;
-    }
+    
 
 }

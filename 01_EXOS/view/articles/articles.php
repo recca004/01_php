@@ -1,5 +1,5 @@
 <h1>Articles</h1>
-
+<a href="<?php echo SITE_URL;?>/index.php?page=articles&action=show">Ajouter un article</a>
 <?php 
 if( isset( $datas[ 'articles' ] ) )
 {
