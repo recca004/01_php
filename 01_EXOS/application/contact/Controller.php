@@ -1,21 +1,12 @@
 <?php
+/**
+ * Page contact 
+ */
+class Controller extends ControllerCommon{
 
-class Controller{
 
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
     
-    public function __construct($page, $action){
-        $this->_page = $page;
-        $this->_action = $action;
-        $this->_setDatas();
-    }
-    
-    
-    
-    private function _setDatas(){
+    protected function _setDatas(){
         
         switch ($this->_action){
             case 'send':
@@ -81,12 +72,7 @@ class Controller{
         $this->_datas=$datas;
     }
     
-    public function get_datas(){
-        return $this->_datas;
-    }
-    public function get_view(){
-        return $this->_view;
-    }
+
 }
     
     

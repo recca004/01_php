@@ -1,25 +1,28 @@
 <?php
-class Controller{
+/**
+ * Page article 
+ */
+class Controller extends ControllerCommon{
 
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
-    
-    public function __construct($page, $action){
-        $this->_page=$page;
-        $this->_action=$action;
-        $this->_setDatas();
-    }
+
     
     
     
-    private function _setDatas(){
+    protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
                 $this->_datas=$this->_article($_GET['id']);
                 break;
+            case 'show':
+                 $this->_view  = 'articles/article_form';
+                 break;
+              case 'insert':
+                 $this->_insertarticle();
+                 break;
+            case 'del':
+                $this->_deltarticle();
+                
             default :
                 $this->_datas=$this->_articles();
                 break;
@@ -68,29 +71,46 @@ class Controller{
 
         return $datas;
     }
-    private function _articleshow( $id ){
-        $datas = array();
-
+     private function _insertarticle(){
+        $datas=$_POST;
+         
         $db = Db::connect();
+         
+        
+        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
+        
+        
+        $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
+        $db->query($query);
+        
+        
+         $this->_view  = 'articles/articles';
+         $this->_datas=$this->_articles();
+        
+//        $this->_view  = 'articles/article_form';
+        
+         
+     }
+    private function _deltarticle(){
+        $datas=$_POST;
+         
+        $db = Db::connect();        
+        
+        $query='DELETE FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'';
+     
+        
+        
+         $this->_view  = 'articles/articles';
+         $this->_datas=$this->_articles();
+        
 
-        $results = $db->query( 'SELECT * FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
-
-        if( !$db->errno && $results->num_rows > 0 )
-        {
-            $datas[ 'article' ] = $results;
-        }
-
-        //$datas[ 'view' ] = 'articles/article_form';
-         $datas=$this->_view  = 'contact/contact';
-
-        return $datas;
-    }
+        
+         
+     }
+  
 
 
-    public function get_datas(){
-        return $this->_datas;
-    }
-    public function get_view(){
-        return $this->_view;
-    }
+
 }

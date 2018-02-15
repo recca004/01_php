@@ -1,5 +1,5 @@
 <h1>Articles</h1>
-
+<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del">Ajouter un article</a>
 <p>
     <a href="<?php echo SITE_URL; ?>">&lt; Retour aux articles</a>
 </p>
