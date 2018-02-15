@@ -14,7 +14,7 @@
                 </h2>
             </menu>
             <main>
-                <?php include SITE_PATH . '/view/'.$datas['view'].'.php'; ?>
+                <?php include SITE_PATH . '/view/' . $view . '.php'; ?>
             </main>
         </div>
     </body>

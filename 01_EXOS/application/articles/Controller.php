@@ -1,37 +1,27 @@
 <?php
-class Controller{
-
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
+class Controller extends ControllerCommon
+{
     
-    public function __construct($page, $action){
-        $this->_page=$page;
-        $this->_action=$action;
-        $this->_setDatas();
-    }
-    
-    
-    
-    private function _setDatas(){
-        
+    protected function _setDatas()
+    {
         switch ($this->_action){
-            case 'detail':
-                $this->_datas=$this->_article($_GET['id']);
+            case 'detail' :
+                $this->_article($_GET['id']);
                 break;
-            case 'insert':
+            
+            case 'show' :
+                $this->_view = 'articles/article_form';
+                break;
+            
+            case 'insert' :
+                $this->_insert();
+                break;
                 
             default :
-                $this->_datas=  $this->_articles();
+                $this->_articles();
                 break;
         }
     }
-
-
-
-
-
 
 
     private function _articles()
@@ -47,9 +37,9 @@ class Controller{
             $datas[ 'articles' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/articles';
+        $this->_view = 'articles/articles';
 
-        return $datas;
+        $this->_datas = $datas;
     }
 
 
@@ -66,13 +56,53 @@ class Controller{
             $datas[ 'article' ] = $results;
         }
 
-        $datas[ 'view' ] = 'articles/article_detail';
+        $this->_view = 'articles/article_detail';
 
-        return $datas;
+        $this->_datas = $datas;
     }
-
-
-    public function get_Datas(){
-        return $this->_datas;
+    
+    
+    private function _insert()
+    {
+        $datas = $_POST;
+        
+        $db = Db::connect();
+        
+        if ( empty( $datas['TitleArticle']) ){
+            $datas['error']['titleempty'] = true;
+        }
+        if ( empty( $datas['IntroArticle']) ){
+            $datas['error']['introempty'] = true;
+        }
+        if ( empty( $datas['ContentArticle']) ){
+            $datas['error']['contentempty'] = true;
+        }
+        
+        if ( isset( $datas['error'] ) ){
+            $this->_datas = $datas;
+            $this->_view = 'articles/article_form';
+            return;
+        }
+        
+        $TitleArticle = $db->real_escape_string( $datas['TitleArticle'] );
+        $IntroArticle = $db->real_escape_string( $datas['IntroArticle'] );
+        $ContentArticle = $db->real_escape_string( $datas['ContentArticle'] );
+        
+        $query = 'INSERT INTO articles VALUES ( NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\' )';
+        
+        $results = $db->query( $query );
+        
+        if( !$db->errno )
+        {
+            $this->_articles();
+            $this->_view = 'articles/articles';
+        }
+        else
+        {
+            $this->_datas = $datas;
+            $this->_view = 'articles/article_form';
+        }
+        
     }
+    
 }
