@@ -1,7 +1,3 @@
-<?php 
-
-
-?>
 <h1>Articles</h1>
 
 <form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=insert" method="post">

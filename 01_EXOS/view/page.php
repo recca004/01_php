@@ -10,7 +10,7 @@
             <a href="<?php echo SITE_URL ; ?>/index.php?page=articles"> Home </a>
             <a href="<?php echo SITE_URL ; ?>/index.php?page=contact" > Contact </a>
             <main>
-                <?php include SITE_PATH . '/view/'.$datas['view'].'.php'; ?>
+                <?php include SITE_PATH . '/view/'.$view.'.php'; ?>
             </main>
         </div>
     </body>

@@ -1,83 +1,71 @@
 <?php
 
-class Controller{
+class Controller extends ControllerCommon{
 
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
     
-    public function __construct($page, $action){
-        $this->_page = $page;
-        $this->_action = $action;
-        $this->_setDatas();
-    }
-    
-    
-    
-    private function _setDatas(){
+    protected function _setDatas(){
         
         switch ($this->_action){
             case 'send':
-                $this->_datas = $this->_checkMessageSent( $this->_action );
+                $this->_checkMessageSent();
                 break;
                 
             default :
-                $this->_datas['view'] = 'contact/contact';
+                $this->_view = 'contact/contact';
 
                 break;
         }
     }
     
     
-     
-private function _checkMessageSent($action)
-{
-    $datas = array();
-    
-    if($action === 'send' )
+    /**
+     * Vérifie les champs du formulaire et envoie l'email si aucune erreur n'est trouvée
+     * @return array
+     */
+    private function _checkMessageSent()
     {
-        $datas = $_POST;
+        $datas = array();
+  
+        if($this->_action === 'send' )
+        {
+            $datas = $_POST;
 
-        if( empty( $_POST[ 'email' ] ) )
-        {
-            $datas[ 'error' ][ 'emailempty' ] = true;
-        }
-        else if( !filter_var( $_POST[ 'email' ], FILTER_VALIDATE_EMAIL ) )
-        {
-            $datas[ 'error' ][ 'emailformat' ] = true;
-        }
+            if( empty( $_POST[ 'email' ] ) )
+            {
+                $datas[ 'error' ][ 'emailempty' ] = true;
+            }
+            else if( !filter_var( $_POST[ 'email' ], FILTER_VALIDATE_EMAIL ) )
+            {
+                $datas[ 'error' ][ 'emailformat' ] = true;
+            }
 
-        if( empty( $_POST[ 'message' ] ) )
-        {
-            $datas[ 'error' ][ 'messageempty' ] = true;
-          
-        }
+            if( empty( $_POST[ 'message' ] ) )
+            {
+                $datas[ 'error' ][ 'messageempty' ] = true;
 
-        if( !isset( $datas[ 'error' ] ) )
-        {
-         //send message by mail
-          mail( 'bobunae@gmail.com', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
-            
-            $datas[ 'view' ] = 'contact/contact_sent';
+            }
+
+            if( !isset( $datas[ 'error' ] ) )
+            {
+             //send message by mail
+              mail( 'bobunae@gmail.com', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+
+                $this->_view = 'contact/contact_sent';
+            }
+            else
+            {
+                $this->_view = 'contact/contact';
+            }
         }
         else
         {
-            $datas[ 'view' ] = 'contact/contact';
+            $this->_view = 'contact/contact';
         }
+
+        $this->_datas = $datas;
     }
-    else
-    {
-        $datas[ 'view' ] = 'contact/contact';
-    }
-    
-    var_dump($datas);
-    return $datas;
-}
-    
-    public function get_Datas(){
-        return $this->_datas;
-    }
+
+   
 }
     
     
