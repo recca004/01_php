@@ -1,31 +1,25 @@
 <?php
 
-class Controller{
+class Controller extends ControllerCommon{
    
-    private $_page;
-    private $_action;
-    private $_view;
-    private $_datas;
-    
-    public function __construct($page, $action){
-        $this->_page=$page;
-        $this->_action=$action;
-        $this->_setDatas();
-    }
-    
-    private function _setDatas(){
+    protected function _setDatas(){
         switch ($this->_action){
             
             case 'send':
-                $this->_datas = $this->_checkMessageSent();
+                $this->_checkMessageSent();
                 break;
             
             default :
-                $this->_datas['view']='contact/contact';
+                $this->_view = 'contact/contact';
                 break;
         }
     }  
     
+    /**
+     * vérifie les champs du formulaire et envoie l'émail 
+                                        * si aucune erreur n'est trouvé
+     * @return array
+     */
     private function _checkMessageSent()
 {
     $datas = array();
@@ -51,27 +45,25 @@ class Controller{
         if( !isset( $datas[ 'error' ] ) )
         {
             // send message by mail
-            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ],
+                                        //   'From:'.$datas[ 'email' ] );
             
-            $datas[ 'view' ] = 'contact/contact_sent';
+            $this->_view = 'contact/contact_sent';
         }
         else
         {
-            $datas[ 'view' ] = 'contact/contact';
+            $this->_view = 'contact/contact';
         }
     }
     else
     {
-        $datas[ 'view' ] = 'contact/contact';
+        $this->_view = 'contact/contact';
     }
     
-    return $datas;
+    
+    $this->_datas = $datas;
 }
-
-    public function get_Datas(){
-        return $this->_datas;
-    }
-       
+  
 }
 
 
