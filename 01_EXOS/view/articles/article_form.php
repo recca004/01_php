@@ -1,6 +1,35 @@
 <h1>Articles</h1>
 
-<form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=insert" method="post">
+<?php 
+
+if( !empty( $_GET['id'] ) )
+{
+    $formAction = 'update';
+    $id = $_GET['id'];
+?>
+
+<p><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $id; ?>">&lt; Retour à l'article</a></p>
+
+<?php
+}
+else
+{
+    $id = 0;
+    $formAction = 'insert';
+    $datas[ 'article' ] = array(
+        'TitleArticle' => ( isset($_POST['TitleArticle']) ? $_POST['TitleArticle'] : ''),
+        'IntroArticle' => ( isset($_POST['IntroArticle']) ? $_POST['IntroArticle'] : ''),
+        'ContentArticle' => ( isset($_POST['ContentArticle']) ? $_POST['ContentArticle'] : '')
+    );
+?>
+
+<p><a href="<?php echo SITE_URL; ?>">&lt; Retour aux articles</a></p>
+
+<?php
+}
+?>
+
+<form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=<?php echo $formAction; ?>&id=<?php echo $id; ?>" method="post">
     <label for="TitleArticle">
         <?php echo ( isset( $datas[ 'error' ][ 'titleempty' ] ) ) ? '<span class="alert">Aucun titre n\'a été indiqué.</span><br />' : ''; ?>
         <input type="text" name="TitleArticle" id="TitleArticle" value="<?php echo ( isset( $datas['TitleArticle'] ) ) ? $datas['TitleArticle'] : ''; ?>" placeholder="Titre de l'article" />

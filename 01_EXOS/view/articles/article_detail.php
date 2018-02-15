@@ -5,17 +5,16 @@
 </p>
 
 <?php 
-if( isset( $datas[ 'article' ] ) )
+if( isset( $datas ) )
 {
-    $row = $datas[ 'article' ]->fetch_array();
     ?>
         <article>
-            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=details&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a></h2>
+            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo  $datas[ 'IdArticle' ]; ?>"><?php echo  $datas[ 'TitleArticle' ]; ?></a></h2>
             <p>
-                <?php echo $row[ 'IntroArticle' ]; ?>
+                <?php echo  $datas[ 'IntroArticle' ]; ?>
             </p>
             <p>
-                <?php echo $row[ 'ContentArticle' ]; ?>
+                <?php echo  $datas[ 'ContentArticle' ]; ?>
             </p>
         </article>
     <?php
