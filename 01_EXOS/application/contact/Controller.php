@@ -23,26 +23,28 @@ class Controller extends ControllerCommon
             
             if( empty( $_POST[ 'email' ] ) )
             {
-                $datas[ 'error' ][ 'emailempty' ] = true;
+                $datas[ 'error' ][ 'email' ] = 'empty';
             }
             else if( !filter_var( $_POST[ 'email' ], FILTER_VALIDATE_EMAIL ) )
             {
-                $datas[ 'error' ][ 'emailformat' ] = true;
+                $datas[ 'error' ][ 'email' ] = 'invalid';
             }
             if( empty( $_POST[ 'message' ] ) )
             {
-                $datas[ 'error' ][ 'messageempty' ] = true;
+                $datas[ 'error' ][ 'message' ] = 'empty';
             }
 
             if ( isset($datas['error']) )
             {
-                $this->_view = 'contact/contact';
                 $this->_datas = $datas;
+                $this->_datas['result'] = SEND_ERROR;
+                $this->_view = 'contact/contact';
                 return;
             }
             // send message by mail
             // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
-
+            
+            $this->_datas['result'] = SEND_SUCCESS;
             $this->_view = 'contact/contact_sent';
         }
         else
@@ -52,4 +54,6 @@ class Controller extends ControllerCommon
 
         $this->_datas = $datas;
     }
+    
+    
 }

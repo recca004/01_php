@@ -1,49 +1,14 @@
 <h1>Articles</h1>
 
-<?php 
+<p><?php $Controller->get_backUrl(); ?></p>
 
-if( !empty( $_GET['id'] ) )
-{
-    $formAction = 'update';
-    $id = $_GET['id'];
-?>
-
-<p><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $id; ?>">&lt; Retour à l'article</a></p>
-
-<?php
-}
-else
-{
-    $id = 0;
-    $formAction = 'insert';
-    $datas[ 'article' ] = array(
-        'TitleArticle' => ( isset($_POST['TitleArticle']) ? $_POST['TitleArticle'] : ''),
-        'IntroArticle' => ( isset($_POST['IntroArticle']) ? $_POST['IntroArticle'] : ''),
-        'ContentArticle' => ( isset($_POST['ContentArticle']) ? $_POST['ContentArticle'] : '')
-    );
-?>
-
-<p><a href="<?php echo SITE_URL; ?>">&lt; Retour aux articles</a></p>
-
-<?php
-}
-?>
-
-<form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=<?php echo $formAction; ?>&id=<?php echo $id; ?>" method="post">
-    <label for="TitleArticle">
-        <?php echo ( isset( $datas[ 'error' ][ 'titleempty' ] ) ) ? '<span class="alert">Aucun titre n\'a été indiqué.</span><br />' : ''; ?>
-        <input type="text" name="TitleArticle" id="TitleArticle" value="<?php echo ( isset( $datas['TitleArticle'] ) ) ? $datas['TitleArticle'] : ''; ?>" placeholder="Titre de l'article" />
-    </label>
+<form action="<?php $Controller->get_formUrl(); ?>" method="post">
     
-    <label for="IntroArticle">
-        <?php echo ( isset( $datas[ 'error' ][ 'introempty' ] ) ) ? '<span class="alert">Aucune introduction n\'a été indiquée.</span><br />' : ''; ?>
-        <textarea id="IntroArticle" name="IntroArticle" placeholder="Introduction de l'article"><?php echo ( isset( $datas['IntroArticle'] ) ) ? $datas['IntroArticle'] : ''; ?></textarea>
-    </label>
-    
-    <label for="ContentArticle">
-        <?php echo ( isset( $datas[ 'error' ][ 'contentempty' ] ) ) ? '<span class="alert">Aucun contenu n\'a été indiqué.</span><br />' : ''; ?>
-        <textarea id="ContentArticle" name="ContentArticle" placeholder="Contenu principal de l'article"><?php echo ( isset( $datas['ContentArticle'] ) ) ? $datas['ContentArticle'] : ''; ?></textarea>
-    </label>
+    <?php
+    $Controller->generateFormField( 'TitleArticle', 'text', 'Titre de l\'article' );
+    $Controller->generateFormField( 'IntroArticle', 'textarea', 'Introduction de l\'article' );
+    $Controller->generateFormField( 'ContentArticle', 'textarea', 'Contenu principal de l\'article' );
+    ?>
     
     <button class="btn">Envoyer</button>
     

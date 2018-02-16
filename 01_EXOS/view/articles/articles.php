@@ -1,6 +1,6 @@
 <h1>Articles</h1>
 
-<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a>
+<p><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a></p>
 
 <?php 
 if( isset( $datas ) )
@@ -14,7 +14,7 @@ if( isset( $datas ) )
                 <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a>
             </h2>
             <p>
-                <?php echo $row[ 'IntroArticle' ]; ?>
+                <?php echo nl2br($row[ 'IntroArticle' ]); ?>
             </p>
         </article>
     <?php

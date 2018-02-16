@@ -25,7 +25,42 @@ class ControllerCommon
         $this->_setDatas();
     }
     
-    public function get_datas(){
+    private function _fieldValue($fieldName)
+    {
+        return ( isset( $this->_datas[$fieldName] ) ) ? $this->_datas[$fieldName] : '';
+    }
+    
+    public function generateFormField( $fieldName, $type, $placeHolder )
+    {
+        
+        $Err = new ErrorHandler( $this->_datas );
+        
+        if ( $type == 'text' )
+        {
+            echo    '<label for="' . $fieldName . '">'
+                    . $Err->get_message($fieldName)
+                    . '<input type="' . $type . '" class="' . $Err->get_class($fieldName) . '" '
+                    . 'name="' . $fieldName . '" '
+                    . 'id="' . $fieldName . '" '
+                    . 'value="' . $this->_fieldValue($fieldName) . '" '
+                    . 'placeholder="' . $placeHolder . '" />'
+                    . '</label>';
+        }
+        else if ( $type == 'textarea' )
+        {
+            echo    '<label for="' . $fieldName . '">'
+                    . $Err->get_message($fieldName)
+                    . '<textarea class="' . $Err->get_class($fieldName) . '" '
+                    . 'name="' . $fieldName . '" '
+                    . 'id="' . $fieldName . '" '
+                    . 'placeholder="' . $placeHolder . '" />'
+                    . $this->_fieldValue($fieldName)
+                    . '</textarea></label>';
+        }
+    }
+    
+    public function get_datas()
+    {
         return $this->_datas;
     }
     
