@@ -4,39 +4,34 @@
  */
 class Controller extends ControllerCommon{
 
-
-    
-    
-    
     protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
-                $this->_datas=$this->_article($_GET['id']);
+                $this->_article();
                 break;
+            
             case 'show':
                  $this->_view  = 'articles/article_form';
                  break;
+             
               case 'insert':
                 $this->_insert();
                  break;
-            case 'del':
-                 $this->_del();
+             
+            case 'delete':
+                 $this->_delete();
                  break;
+             
             case 'update':
                 $this->_update();
                 break;
+            
             default :
-                $this->_datas=$this->_articles();
+                $this->_articles();
                 break;
         }
     }
-
-
-
-
-
-
 
     private function _articles()
     {
@@ -52,13 +47,12 @@ class Controller extends ControllerCommon{
         }
 
         $this->_view  = 'articles/articles';
-
-        return $datas;
+        $this->_datas = $datas;
     }
 
-
-    private function _article( $id )
+    private function _article()
     {
+        $id = $_GET['id'];
         $datas = array();
 
         $db = Db::connect();
@@ -71,9 +65,9 @@ class Controller extends ControllerCommon{
         }
 
         $this->_view  = 'articles/article_detail';
-
-        return $datas;
+        $this->_datas = $datas;
     }
+    
      private function _insert(){
         $datas = $_POST;
             if (empty(  $datas[ 'TitleArticle' ] ) ){
@@ -85,12 +79,14 @@ class Controller extends ControllerCommon{
             if (empty(  $datas[ 'ContentArticle' ] ) ){
                 $datas[ 'error' ][ 'contentempty' ] = true;
             }
-            
-            
-            
+        
+            if (isset($datas))
+            {
+                $this->_view  = 'articles/articles';
+                $this->_articles();
+            }
         $db = Db::connect();
          
-        
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
         $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
         $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
@@ -101,48 +97,47 @@ class Controller extends ControllerCommon{
         
         if( $db->errno)
         {
-
             $this->_view  = 'articles/article_form';
             $this->_datas= $datas;
-            
-            
             return;
         }
 
          $this->_view  = 'articles/articles';
-         $this->_datas=$this->_articles();
+         $this->_articles();
         
-//        $this->_view  = 'articles/article_form';
-        
-         
      }
-    private function _del(){
-    
-        $db = Db::connect();        
+     
+    private function _delete(){
+        $db = Db::connect();    
         $id=$db->real_escape_string($_GET['id']);
         $query='DELETE FROM articles WHERE IdArticle ='.$id;
         $db->query($query);
-        
-        // if( $db->errno){
-        //        $this->_view  = 'articles/article_form';
-        //        $this->_datas= $datas;
-        //        return;
-        // }
+        if( $db->errno){}
         $this->_view  = 'articles/articles';
-        $this->_datas=$this->_articles();
-
+        $this->_articles();
      }
      
-         private function _update(){
-    
-        $db = Db::connect();        
+    private function _update(){
+        
+        $this->_view  = 'articles/articles_form';
+        $this->_article();
+        
+        
+        
+        
+        /*
+        $db = Db::connect();
+        
         $id=$db->real_escape_string($_GET['id']);
+        
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
         $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
         $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
+        
         $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+        
         $db->query($query);
-
+        */
 
      }
   

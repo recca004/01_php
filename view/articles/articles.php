@@ -12,8 +12,8 @@ if( isset( $datas[ 'articles' ] ) )
                 <?php echo $row[ 'IntroArticle' ]; ?>
             </p>
             <p>
-                <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php echo $row[ 'IdArticle' ]; ?>">DEL article</a></br>
-                 <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>">DEL article</a></br>
+                <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=delete&id=<?php echo $row[ 'IdArticle' ]; ?>">Delete article</a><br>
+                <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=update&id=<?php echo $row[ 'IdArticle' ]; ?>">Edit article</a>
                 
             </p>
         </article>
