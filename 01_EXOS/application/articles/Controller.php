@@ -21,8 +21,11 @@ class Controller extends ControllerCommon{
                 $this->_insert();
                  break;
             case 'del':
-                 $this->_del($_GET['id']);
-                
+                 $this->_del();
+                 break;
+            case 'update':
+                $this->_update();
+                break;
             default :
                 $this->_datas=$this->_articles();
                 break;
@@ -113,14 +116,33 @@ class Controller extends ControllerCommon{
         
          
      }
-    private function _del($id){
-        $datas=$_POST;
-         
+    private function _del(){
+    
         $db = Db::connect();        
-         $articlesss=$this->_datas=$this->_article($_GET['id']);
-        $query='DELETE FROM articles WHERE articles IdArticle = \''.$articlesss.'';
-     $db->query($query);
+        $id=$db->real_escape_string($_GET['id']);
+        $query='DELETE FROM articles WHERE IdArticle ='.$id;
+        $db->query($query);
         
+        // if( $db->errno){
+        //        $this->_view  = 'articles/article_form';
+        //        $this->_datas= $datas;
+        //        return;
+        // }
+        $this->_view  = 'articles/articles';
+        $this->_datas=$this->_articles();
+
+     }
+     
+         private function _update(){
+    
+        $db = Db::connect();        
+        $id=$db->real_escape_string($_GET['id']);
+        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
+        $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+        $db->query($query);
+
 
      }
   
