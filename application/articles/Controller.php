@@ -132,6 +132,13 @@ class Controller extends ControllerCommon{
             return;
         }
         
+        if (count($_POST) == 0)
+        {
+            $this->_article($_GET['id']);
+            $this->_view = 'articles/article_form';
+            return;
+        }    
+        
         if (empty(  $datas[ 'TitleArticle' ] ) ){
             $datas[ 'error' ][ 'titleempty' ] = true;
         }
