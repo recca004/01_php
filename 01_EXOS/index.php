@@ -7,13 +7,19 @@ $page=(isset($_GET['page'])) ? $_GET['page'] : 'articles';
 $action=(isset($_GET['action'])) ? $_GET['action'] : '';
 
 
-
-
 include SITE_PATH . '/includes/Db.php';
+
+include SITE_PATH . '/includes/commons/ControllerCommon.php';
+
 include SITE_PATH . '/application/'.$page.'/Controller.php';
 
-$Controller=new Controller($page, $action);
-$datas=$Controller->get_Datas();
+$Controller=new Controller($page, $action); 
 
+$datas = $Controller->get_Datas();
+$view  = $Controller->get_view();
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> a00d46029bb8c651ce1bfe9404603beedafe3bef
 include SITE_PATH . '/view/page.php';

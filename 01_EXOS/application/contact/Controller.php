@@ -1,10 +1,30 @@
 <?php
 
-function checkMessageSent( $action )
+class Controller extends ControllerCommon{
+   
+    protected function _setDatas(){
+        switch ($this->_action){
+            
+            case 'send':
+                $this->_checkMessageSent();
+                break;
+            
+            default :
+                $this->_view = 'contact/contact';
+                break;
+        }
+    }  
+    
+    /**
+     * vérifie les champs du formulaire et envoie l'émail 
+                                        * si aucune erreur n'est trouvé
+     * @return array
+     */
+    private function _checkMessageSent()
 {
     $datas = array();
     
-    if($action === 'send' )
+    if($this->_action === 'send' )
     {
         $datas = $_POST;
 
@@ -25,19 +45,25 @@ function checkMessageSent( $action )
         if( !isset( $datas[ 'error' ] ) )
         {
             // send message by mail
-            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ],
+                                        //   'From:'.$datas[ 'email' ] );
             
-            $datas[ 'view' ] = 'contact_sent';
+            $this->_view = 'contact/contact_sent';
         }
         else
         {
-            $datas[ 'view' ] = 'contact';
+            $this->_view = 'contact/contact';
         }
     }
     else
     {
-        $datas[ 'view' ] = 'contact';
+        $this->_view = 'contact/contact';
     }
     
-    return $datas;
+    
+    $this->_datas = $datas;
 }
+  
+}
+
+
