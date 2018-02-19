@@ -3,40 +3,31 @@
  * Page article 
  */
 class Controller extends ControllerCommon{
-
-
-    
-    
     
     protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
-                $this->_datas=$this->_article($_GET['id']);
+                $this->_article();
                 break;
             case 'show':
-                 $this->_view  = 'articles/article_form';
+                //$this->_view  = 'articles/article_form';
+                $this->_show();
                  break;
-              case 'insert':
+            case 'insert':
                 $this->_insert();
                  break;
             case 'del':
-                 $this->_del();
+                $this->_del();
                  break;
             case 'update':
                 $this->_update();
                 break;
             default :
-                $this->_datas=$this->_articles();
+                $this->_articles();
                 break;
         }
     }
-
-
-
-
-
-
 
     private function _articles()
     {
@@ -52,13 +43,15 @@ class Controller extends ControllerCommon{
         }
 
         $this->_view  = 'articles/articles';
-
-        return $datas;
+        $this->_datas = $datas;
     }
 
 
-    private function _article( $id )
+    private function _article()
     {
+        
+        $id = $_GET['id'];
+        
         $datas = array();
 
         $db = Db::connect();
@@ -71,51 +64,62 @@ class Controller extends ControllerCommon{
         }
 
         $this->_view  = 'articles/article_detail';
-
-        return $datas;
+        $this->_datas = $datas;
     }
-     private function _insert(){
+    
+    
+    private function _show()
+    {
+        if ( isset( $_GET['id'] ) && !empty( $_GET['id'] ) && is_numeric($_GET['id']) )
+        {
+            $this->_article( $_GET['id'] );
+            
+        }
+        $this->_view = 'articles/article_form';
+    }
+    
+    private function _insert()
+    {
+        
         $datas = $_POST;
-            if (empty(  $datas[ 'TitleArticle' ] ) ){
-                $datas[ 'error' ][ 'titleempty' ] = true;
-            }
-            if (empty( $datas[ 'IntroArticle' ] ) ){
-                $datas[ 'error' ][ 'introempty' ] = true;
-            }
-            if (empty(  $datas[ 'ContentArticle' ] ) ){
-                $datas[ 'error' ][ 'contentempty' ] = true;
-            }
-            
-            
+        
+        if (empty(  $datas[ 'TitleArticle' ] ) ){
+            $datas[ 'error' ][ 'titleempty' ] = true;
+        }
+        if (empty( $datas[ 'IntroArticle' ] ) ){
+            $datas[ 'error' ][ 'introempty' ] = true;
+        }
+        if (empty(  $datas[ 'ContentArticle' ] ) ){
+            $datas[ 'error' ][ 'contentempty' ] = true;
+        }
+        
+        if ( isset( $datas[ 'error' ] ) )
+        {
+            $this->_view  = 'articles/article_form';
+            $this->_datas = $datas;
+            return;
+        }
             
         $db = Db::connect();
          
-        
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
         $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
         $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
         
-        
         $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
         $db->query($query);
         
-        if( $db->errno)
+        if( $db->errno )
         {
-
             $this->_view  = 'articles/article_form';
-            $this->_datas= $datas;
-            
-            
+            $this->_datas = $datas;
             return;
         }
 
-         $this->_view  = 'articles/articles';
-         $this->_datas=$this->_articles();
-        
-//        $this->_view  = 'articles/article_form';
-        
-         
-     }
+        $this->_view  = 'articles/articles';
+        $this->_articles();
+       
+    }
     private function _del(){
     
         $db = Db::connect();        
@@ -129,20 +133,64 @@ class Controller extends ControllerCommon{
         //        return;
         // }
         $this->_view  = 'articles/articles';
-        $this->_datas=$this->_articles();
+        $this->_articles();
 
      }
      
-         private function _update(){
-    
-        $db = Db::connect();        
-        $id=$db->real_escape_string($_GET['id']);
-        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
-        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
-        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
-        $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+    private function _update()
+    {
+        $datas = $_POST;
+        
+        if ( empty( $_GET['id'] ) && !is_numeric($_GET['id']) )
+        {
+            $this->_view = 'articles/article_form';
+            $this->_datas = $datas;
+            return;
+        }
+        
+        /*
+        if ( count( $_POST ) == 0 )
+        {
+            $this->_article( $_GET['id'] );
+            $this->_view = 'articles/article_form';
+            return;
+        }
+        */
+        
+        if (empty( $datas[ 'TitleArticle' ] ) ){
+            $datas[ 'error' ][ 'titleempty' ] = true;
+        }
+        if (empty( $datas[ 'IntroArticle' ] ) ){
+            $datas[ 'error' ][ 'introempty' ] = true;
+        }
+        if (empty( $datas[ 'ContentArticle' ] ) ){
+            $datas[ 'error' ][ 'contentempty' ] = true;
+        }
+        
+        if ( isset( $datas[ 'error' ] ) )
+        {
+            $this->_view  = 'articles/article_form';
+            $this->_datas = $datas;
+            return;
+        }
+        
+        $db = Db::connect();
+        
+        $TitleArticle = $db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle = $db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle = $db->real_escape_string($datas['ContentArticle']);
+        
+        $query = 'UPDATE articles SET '
+                . 'TitleArticle = \''.$TitleArticle.'\', '
+                . 'IntroArticle = \''.$IntroArticle.'\', '
+                . 'ContentArticle = \''.$ContentArticle.'\' '
+                . 'WHERE IdArticle = ' . $_GET['id'];
+        
         $db->query($query);
-
+        
+        //$this->_article( $_GET['id'] );
+        $this->_articles();
+        $this->_view  = 'articles/articles';
 
      }
   

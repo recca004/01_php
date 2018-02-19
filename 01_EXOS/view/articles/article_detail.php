@@ -1,6 +1,4 @@
 <h1>Articles</h1>
-<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php $datas[ 'IdArticle' ]; ?>">DEL article</a> 
-  <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>">show article</a></br>
 <p>
     <a href="<?php echo SITE_URL; ?>">&lt; Retour aux articles</a>
 </p>
@@ -18,6 +16,8 @@ if( isset( $datas[ 'article' ] ) )
             <p>
                 <?php echo $row[ 'ContentArticle' ]; ?>
             </p>
+<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php echo $row[ 'IdArticle' ]; ?>">DEL article</a> 
+  <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>">show article</a></br>
         </article>
     <?php
 }

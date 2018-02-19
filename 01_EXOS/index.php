@@ -17,6 +17,6 @@ $Controller = new Controller($page, $action);
 
 $datas=$Controller->get_datas();
 $view=$Controller->get_view();
-var_dump($datas);
+//var_dump($datas);
 
 include SITE_PATH . '/view/page.php';
