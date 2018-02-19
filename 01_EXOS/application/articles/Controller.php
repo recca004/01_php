@@ -18,11 +18,14 @@ class Controller extends ControllerCommon{
                  $this->_view  = 'articles/article_form';
                  break;
               case 'insert':
-                 $this->_insertarticle();
+                $this->_insert();
                  break;
             case 'del':
-                $this->_deltarticle();
-                
+                 $this->_del();
+                 break;
+            case 'update':
+                $this->_update();
+                break;
             default :
                 $this->_datas=$this->_articles();
                 break;
@@ -71,9 +74,20 @@ class Controller extends ControllerCommon{
 
         return $datas;
     }
-     private function _insertarticle(){
-        $datas=$_POST;
-         
+     private function _insert(){
+        $datas = $_POST;
+            if (empty(  $datas[ 'TitleArticle' ] ) ){
+                $datas[ 'error' ][ 'titleempty' ] = true;
+            }
+            if (empty( $datas[ 'IntroArticle' ] ) ){
+                $datas[ 'error' ][ 'introempty' ] = true;
+            }
+            if (empty(  $datas[ 'ContentArticle' ] ) ){
+                $datas[ 'error' ][ 'contentempty' ] = true;
+            }
+            
+            
+            
         $db = Db::connect();
          
         
@@ -85,7 +99,16 @@ class Controller extends ControllerCommon{
         $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
         $db->query($query);
         
-        
+        if( $db->errno)
+        {
+
+            $this->_view  = 'articles/article_form';
+            $this->_datas= $datas;
+            
+            
+            return;
+        }
+
          $this->_view  = 'articles/articles';
          $this->_datas=$this->_articles();
         
@@ -93,21 +116,34 @@ class Controller extends ControllerCommon{
         
          
      }
-    private function _deltarticle(){
-        $datas=$_POST;
-         
+    private function _del(){
+    
         $db = Db::connect();        
+        $id=$db->real_escape_string($_GET['id']);
+        $query='DELETE FROM articles WHERE IdArticle ='.$id;
+        $db->query($query);
         
-        $query='DELETE FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'';
-     
-        
-        
-         $this->_view  = 'articles/articles';
-         $this->_datas=$this->_articles();
-        
+        // if( $db->errno){
+        //        $this->_view  = 'articles/article_form';
+        //        $this->_datas= $datas;
+        //        return;
+        // }
+        $this->_view  = 'articles/articles';
+        $this->_datas=$this->_articles();
 
-        
-         
+     }
+     
+         private function _update(){
+    
+        $db = Db::connect();        
+        $id=$db->real_escape_string($_GET['id']);
+        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
+        $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+        $db->query($query);
+
+
      }
   
 

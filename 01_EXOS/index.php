@@ -17,9 +17,6 @@ $Controller = new Controller($page, $action);
 
 $datas=$Controller->get_datas();
 $view=$Controller->get_view();
-
-
-
-echo 'Sonja G';
+var_dump($datas);
 
 include SITE_PATH . '/view/page.php';
