@@ -10,6 +10,10 @@ if( isset( $datas[ 'article' ] ) )
     $row = $datas[ 'article' ]->fetch_array();
     ?>
         <article>
+            
+            <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=delete&id=<?php echo $row['IdArticle']; ?>">Supprimer l'article</a>
+            <br>
+            <br>
             <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=details&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a></h2>
             <p>
                 <?php echo $row[ 'IntroArticle' ]; ?>
@@ -17,6 +21,8 @@ if( isset( $datas[ 'article' ] ) )
             <p>
                 <?php echo $row[ 'ContentArticle' ]; ?>
             </p>
+            <br>
+            <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=edit&id=<?php echo $row['IdArticle']; ?>">Éditer l'article</a>
         </article>
     <?php
 }
