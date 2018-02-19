@@ -29,8 +29,7 @@ class Controller extends ControllerCommon{
         }
     }
 
-    private function _articles()
-    {
+    private function _articles(){
         $datas = array();
 
         $db = Db::connect();
@@ -47,8 +46,7 @@ class Controller extends ControllerCommon{
     }
 
 
-    private function _article()
-    {
+    private function _article(){
         
         $id = $_GET['id'];
         
@@ -58,28 +56,23 @@ class Controller extends ControllerCommon{
 
         $results = $db->query( 'SELECT * FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
 
-        if( !$db->errno && $results->num_rows > 0 )
-        {
-            $datas[ 'article' ] = $results;
-        }
+            if( !$db->errno && $results->num_rows > 0 ){
+                $datas[ 'article' ] = $results;
+            }
 
         $this->_view  = 'articles/article_detail';
         $this->_datas = $datas;
     }
     
     
-    private function _show()
-    {
-        if ( isset( $_GET['id'] ) && !empty( $_GET['id'] ) && is_numeric($_GET['id']) )
-        {
+    private function _show(){
+        if ( isset( $_GET['id'] ) && !empty( $_GET['id'] ) && is_numeric($_GET['id']) ){
             $this->_article( $_GET['id'] );
-            
         }
         $this->_view = 'articles/article_form';
     }
     
-    private function _insert()
-    {
+    private function _insert(){
         
         $datas = $_POST;
         
@@ -93,8 +86,7 @@ class Controller extends ControllerCommon{
             $datas[ 'error' ][ 'contentempty' ] = true;
         }
         
-        if ( isset( $datas[ 'error' ] ) )
-        {
+        if ( isset( $datas[ 'error' ] ) ){
             $this->_view  = 'articles/article_form';
             $this->_datas = $datas;
             return;
@@ -106,15 +98,14 @@ class Controller extends ControllerCommon{
         $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
         $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
         
-        $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
-        $db->query($query);
-        
-        if( $db->errno )
-        {
-            $this->_view  = 'articles/article_form';
-            $this->_datas = $datas;
-            return;
-        }
+            $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
+            $db->query($query);
+
+            if( $db->errno ){
+                $this->_view  = 'articles/article_form';
+                $this->_datas = $datas;
+                return;
+            }
 
         $this->_view  = 'articles/articles';
         $this->_articles();
@@ -137,12 +128,10 @@ class Controller extends ControllerCommon{
 
      }
      
-    private function _update()
-    {
+    private function _update(){
         $datas = $_POST;
         
-        if ( empty( $_GET['id'] ) && !is_numeric($_GET['id']) )
-        {
+        if ( empty( $_GET['id'] ) && !is_numeric($_GET['id']) ){
             $this->_view = 'articles/article_form';
             $this->_datas = $datas;
             return;
@@ -167,8 +156,7 @@ class Controller extends ControllerCommon{
             $datas[ 'error' ][ 'contentempty' ] = true;
         }
         
-        if ( isset( $datas[ 'error' ] ) )
-        {
+        if ( isset( $datas[ 'error' ] ) ){
             $this->_view  = 'articles/article_form';
             $this->_datas = $datas;
             return;
@@ -180,15 +168,14 @@ class Controller extends ControllerCommon{
         $IntroArticle = $db->real_escape_string($datas['IntroArticle']);
         $ContentArticle = $db->real_escape_string($datas['ContentArticle']);
         
-        $query = 'UPDATE articles SET '
-                . 'TitleArticle = \''.$TitleArticle.'\', '
-                . 'IntroArticle = \''.$IntroArticle.'\', '
-                . 'ContentArticle = \''.$ContentArticle.'\' '
-                . 'WHERE IdArticle = ' . $_GET['id'];
-        
-        $db->query($query);
-        
-        //$this->_article( $_GET['id'] );
+            $query = 'UPDATE articles SET '
+                    . 'TitleArticle = \''.$TitleArticle.'\', '
+                    . 'IntroArticle = \''.$IntroArticle.'\', '
+                    . 'ContentArticle = \''.$ContentArticle.'\' '
+                    . 'WHERE IdArticle = ' . $_GET['id'];
+
+            $db->query($query);
+
         $this->_articles();
         $this->_view  = 'articles/articles';
 

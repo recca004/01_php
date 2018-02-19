@@ -33,6 +33,6 @@ else
         <textarea id="ContentArticle" name="ContentArticle" placeholder="Contenu principal de l'article"><?php echo ( isset( $datas['ContentArticle'] ) ) ? $datas['ContentArticle'] : ''; ?></textarea>
     </label>
     
-    <button class="btn">Envoyer</button>
+    <button class="btn" >Envoyer</button>
     
 </form>
