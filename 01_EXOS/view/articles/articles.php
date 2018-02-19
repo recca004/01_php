@@ -13,7 +13,7 @@ if( isset( $datas[ 'articles' ] ) )
             </p>
             <p>
                 <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php echo $row[ 'IdArticle' ]; ?>">DEL article</a></br>
-                 <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>">DEL article</a></br>
+                 <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=update&id=<?php echo $row[ 'IdArticle' ]; ?>">UpDate</a></br>
                 
             </p>
         </article>
