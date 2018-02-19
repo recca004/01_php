@@ -1,5 +1,6 @@
 <h1>Articles</h1>
-<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del">Ajouter un article</a>
+<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php $datas[ 'IdArticle' ]; ?>">DEL article</a>
+<pre><?php var_dump($datas); ?></pre>
 <p>
     <a href="<?php echo SITE_URL; ?>">&lt; Retour aux articles</a>
 </p>

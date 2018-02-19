@@ -18,10 +18,10 @@ class Controller extends ControllerCommon{
                  $this->_view  = 'articles/article_form';
                  break;
               case 'insert':
-                 $this->_insertarticle();
+                $this->_insert();
                  break;
             case 'del':
-                $this->_deltarticle();
+                 $this->_del($_GET['id']);
                 
             default :
                 $this->_datas=$this->_articles();
@@ -71,9 +71,20 @@ class Controller extends ControllerCommon{
 
         return $datas;
     }
-     private function _insertarticle(){
-        $datas=$_POST;
-         
+     private function _insert(){
+        $datas = $_POST;
+            if (empty(  $datas[ 'TitleArticle' ] ) ){
+                $datas[ 'error' ][ 'titleempty' ] = true;
+            }
+            if (empty( $datas[ 'IntroArticle' ] ) ){
+                $datas[ 'error' ][ 'introempty' ] = true;
+            }
+            if (empty(  $datas[ 'ContentArticle' ] ) ){
+                $datas[ 'error' ][ 'contentempty' ] = true;
+            }
+            
+            
+            
         $db = Db::connect();
          
         
@@ -85,7 +96,16 @@ class Controller extends ControllerCommon{
         $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
         $db->query($query);
         
-        
+        if( $db->errno)
+        {
+
+            $this->_view  = 'articles/article_form';
+            $this->_datas= $datas;
+            
+            
+            return;
+        }
+
          $this->_view  = 'articles/articles';
          $this->_datas=$this->_articles();
         
@@ -93,21 +113,15 @@ class Controller extends ControllerCommon{
         
          
      }
-    private function _deltarticle(){
+    private function _del($id){
         $datas=$_POST;
          
         $db = Db::connect();        
-        
-        $query='DELETE FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'';
-     
-        
-        
-         $this->_view  = 'articles/articles';
-         $this->_datas=$this->_articles();
+         $articlesss=$this->_datas=$this->_article($_GET['id']);
+        $query='DELETE FROM articles WHERE articles IdArticle = \''.$articlesss.'';
+     $db->query($query);
         
 
-        
-         
      }
   
 
