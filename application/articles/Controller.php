@@ -15,7 +15,7 @@ class Controller extends ControllerCommon{
                  $this->_view  = 'articles/article_form';
                  break;
              
-              case 'insert':
+            case 'insert':
                 $this->_insert();
                  break;
              
@@ -68,7 +68,8 @@ class Controller extends ControllerCommon{
         $this->_datas = $datas;
     }
     
-     private function _insert(){
+     private function _insert()
+     {
         $datas = $_POST;
             if (empty(  $datas[ 'TitleArticle' ] ) ){
                 $datas[ 'error' ][ 'titleempty' ] = true;
@@ -80,11 +81,13 @@ class Controller extends ControllerCommon{
                 $datas[ 'error' ][ 'contentempty' ] = true;
             }
         
-            if (isset($datas))
+            if (isset($datas['error']))
             {
-                $this->_view  = 'articles/articles';
-                $this->_articles();
+                $this->_view  = 'articles/article_form';
+                $this->_datas = $datas;
+                return;
             }
+            
         $db = Db::connect();
          
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
@@ -99,6 +102,7 @@ class Controller extends ControllerCommon{
         {
             $this->_view  = 'articles/article_form';
             $this->_datas= $datas;
+            
             return;
         }
 
@@ -119,9 +123,8 @@ class Controller extends ControllerCommon{
      
     private function _update(){
         
-        $this->_view  = 'articles/articles_form';
-        $this->_article();
-        
+        $this->_article($_GET['id']);
+        $this->_view  = 'articles/article_form';
         
         
         
