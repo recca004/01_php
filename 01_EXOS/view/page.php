@@ -6,11 +6,10 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
-        <p> <a href="<?php echo SITE_URL; ?>/index.php?page=Articles">Articles</a> </p>
-        <p> <a href="<?php echo SITE_URL; ?>/index.php?page=Contact">Contact</a> </p>
-        
-        
         <div id="page">
+     
+            <a href="<?php echo SITE_URL ; ?>/index.php?page=articles"> Home </a>
+            <a href="<?php echo SITE_URL ; ?>/index.php?page=contact" > Contact </a>
             <main>
                 <?php include SITE_PATH . '/view/'.$view.'.php'; ?>
             </main>

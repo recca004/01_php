@@ -1,23 +1,42 @@
 <?php
+/**
+ * Page article 
+ */
 class Controller extends ControllerCommon{
-       
+
+
+    
+    
+    
     protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
-                $this->_datas = $this->_article($_GET['id']);
+                $this->_datas=$this->_article($_GET['id']);
                 break;
             case 'show':
-                $this->_view = 'articles/article_form';
-                break;
-            case 'insert':
+                 $this->_view  = 'articles/article_form';
+                 break;
+              case 'insert':
                 $this->_insert();
+                 break;
+            case 'del':
+                 $this->_del();
+                 break;
+            case 'update':
+                $this->_update();
                 break;
             default :
-                $this->_datas =  $this->_articles();
+                $this->_datas=$this->_articles();
                 break;
         }
     }
+
+
+
+
+
+
 
     private function _articles()
     {
@@ -32,10 +51,11 @@ class Controller extends ControllerCommon{
             $datas[ 'articles' ] = $results;
         }
 
-        $this->_view = 'articles/articles';
+        $this->_view  = 'articles/articles';
 
         return $datas;
     }
+
 
     private function _article( $id )
     {
@@ -50,30 +70,83 @@ class Controller extends ControllerCommon{
             $datas[ 'article' ] = $results;
         }
 
-        $this->_view = 'articles/article_detail';
+        $this->_view  = 'articles/article_detail';
 
         return $datas;
     }
-    
-    private function _insert ()
-    {        
+     private function _insert(){
         $datas = $_POST;
+            if (empty(  $datas[ 'TitleArticle' ] ) ){
+                $datas[ 'error' ][ 'titleempty' ] = true;
+            }
+            if (empty( $datas[ 'IntroArticle' ] ) ){
+                $datas[ 'error' ][ 'introempty' ] = true;
+            }
+            if (empty(  $datas[ 'ContentArticle' ] ) ){
+                $datas[ 'error' ][ 'contentempty' ] = true;
+            }
+            
+            
+            
+        $db = Db::connect();
+         
         
-        $db= DB::connect();
+        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
         
-        $TitleArticle   = $db->real_escape_string ($datas['TitleArticle'] ) ;
-        $IntroArticle   = $db->real_escape_string ($datas['IntroArticle'] ) ;
-        $ContentArticle = $db->real_escape_string ($datas['ContentArticle'] ) ;
         
-        $query = 'INSERT INTO articles VALUES( NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\',\''.$ContentArticle.'\' )';
-        
+        $query='INSERT INTO articles VALUES(NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\')';
         $db->query($query);
-                
-        $this->_view = 'articles/articles';
-        $this->_datas = $this->_articles();
-        //$this->_view = 'articles/article_form';
-    }
+        
+        if( $db->errno)
+        {
+
+            $this->_view  = 'articles/article_form';
+            $this->_datas= $datas;
+            
+            
+            return;
+        }
+
+         $this->_view  = 'articles/articles';
+         $this->_datas=$this->_articles();
+        
+//        $this->_view  = 'articles/article_form';
+        
+         
+     }
+    private function _del(){
     
+        $db = Db::connect();        
+        $id=$db->real_escape_string($_GET['id']);
+        $query='DELETE FROM articles WHERE IdArticle ='.$id;
+        $db->query($query);
+        
+        // if( $db->errno){
+        //        $this->_view  = 'articles/article_form';
+        //        $this->_datas= $datas;
+        //        return;
+        // }
+        $this->_view  = 'articles/articles';
+        $this->_datas=$this->_articles();
+
+     }
+     
+         private function _update(){
     
-    
+        $db = Db::connect();        
+        $id=$db->real_escape_string($_GET['id']);
+        $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
+        $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
+        $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
+        $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+        $db->query($query);
+
+
+     }
+  
+
+
+
 }

@@ -1,3 +1,4 @@
+
 <h1>Articles</h1>
 
 <form action="<?php echo SITE_URL; ?>/index.php?page=articles&action=insert" method="post">
@@ -8,7 +9,7 @@
     
     <label for="IntroArticle">
         <?php echo ( isset( $datas[ 'error' ][ 'introempty' ] ) ) ? '<span class="alert">Aucune introduction n\'a été indiquée.</span><br />' : ''; ?>
-        <textarea id="IntroArticle" name="IntroArticle" placeholder="Introduction de l'article"><?php echo ( isset( $datas['ContentArticle'] ) ) ? $datas['ContentArticle'] : ''; ?></textarea>
+        <textarea id="IntroArticle" name="IntroArticle" placeholder="Introduction de l'article"><?php echo ( isset( $datas['IntroArticle'] ) ) ? $datas['IntroArticle'] : ''; ?></textarea>
     </label>
     
     <label for="ContentArticle">
