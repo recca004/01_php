@@ -123,24 +123,61 @@ class Controller extends ControllerCommon{
      
     private function _update(){
         
-        $this->_article($_GET['id']);
-        $this->_view  = 'articles/article_form';
+        $datas = $_POST;
         
+        if (empty($_GET['id'] ) && !is_numeric($_GET['id'] ) ) 
+        {
+            $this->_view = 'articles/article_form';
+            $this->_datas = $datas;
+            return;
+        }
         
+        if (empty(  $datas[ 'TitleArticle' ] ) ){
+            $datas[ 'error' ][ 'titleempty' ] = true;
+        }
+        if (empty( $datas[ 'IntroArticle' ] ) ){
+            $datas[ 'error' ][ 'introempty' ] = true;
+        }
+        if (empty(  $datas[ 'ContentArticle' ] ) ){
+            $datas[ 'error' ][ 'contentempty' ] = true;
+        }
+
+        if (isset($datas['error']))
+        {
+            $this->_view  = 'articles/article_form';
+            $this->_datas = $datas;
+            return;
+        }
         
-        /*
         $db = Db::connect();
-        
-        $id=$db->real_escape_string($_GET['id']);
         
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
         $IntroArticle=$db->real_escape_string($datas['IntroArticle']);
         $ContentArticle=$db->real_escape_string($datas['ContentArticle']);
         
-        $query='UPDATE articles set ($TitleArticle,$IntroArticle,$ContentArticle) WHERE IdArticle ='.$id; 
+        $query ('UPDATE articles SET '
+                . 'TitleArticle    = \''.$TitleArticle.'\', '
+                . 'IntroArticle    = \''.$IntroArticle.'\', '
+                . 'ContentArticle  = \''.$ContentArticle.'\' '
+                . 'WHERE IdArticle = \''.$_GET['id'] );
         
-        $db->query($query);
-        */
+        var_dump($query);
+        
+        if( $db->errno)
+        {
+            $this->_view  = 'articles/article_form';
+            $this->_datas= $datas;
+            
+            return;
+        }
+
+         $this->_view  = 'articles/articles';
+         $this->_articles();
+        
+        $this->_article($_GET['id']);
+        $this->_view  = 'articles/article_form';
+        
+        
 
      }
   
