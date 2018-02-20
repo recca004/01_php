@@ -22,6 +22,8 @@ class Text
      * [form input name => [error type => text]
      */
     protected $_textForm = array(
+        'DB' =>             ['1146' => 'La table n\'existe pas dans la base de données.', 
+                             '1054' => 'Nom de colonne inconnu dans le base de données.'], 
         'TitleArticle' =>   ['empty' => 'Aucun titre n\'a été indiqué.'], 
         'IntroArticle' =>   ['empty' => 'Aucune introduction n\'a été indiquée.'],
         'ContentArticle' => ['empty' => 'Aucun contenu n\'a été indiqué.'],

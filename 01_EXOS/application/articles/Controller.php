@@ -44,13 +44,12 @@ class Controller extends ControllerCommon
         if( !$db->errno && $results->num_rows > 0 )
         {
             while ( $row = $results->fetch_array() ){
-                $datas[] = $row;
+                $datas['articles'][] = $row;
             }
         }
 
-        $this->_view = 'articles/articles';
-
         $this->_datas = $datas;
+        $this->_view = 'articles/articles';
     }
 
 
@@ -66,19 +65,15 @@ class Controller extends ControllerCommon
         {
             $id = $_GET['id'];
         }
-        else
-        {
-            $id = null;
-        }
 
-        if ( $id ){
+        if ( !empty( $id ) ){
             $db = Db::connect();
 
             $results = $db->query( 'SELECT * FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
 
             if( !$db->errno && $results->num_rows > 0 )
             {
-                $datas = $results->fetch_array();
+                $datas['articles'] = $results->fetch_array();
             }
         }
         if ( $this->_action == 'show' )
@@ -113,8 +108,8 @@ class Controller extends ControllerCommon
 
         if (isset($datas['error']))
         {
+            $datas['result'] = SAVE_ERROR;
             $this->_datas = $datas;
-            $this->_datas['result'] = SAVE_ERROR;
             $this->_view = 'articles/article_form';
             return;
         }
@@ -131,9 +126,11 @@ class Controller extends ControllerCommon
         
         if( $db->errno )
         {
+            $datas['error']['DB'] = $db->errno;
+            $datas['result'] = SAVE_ERROR;
             $this->_datas = $datas;
-            $this->_datas['result'] = SAVE_ERROR;
             $this->_view = 'articles/article_form';
+            return;
         }
         
         header('Location:'.SITE_URL.'/index.php?page=articles');
@@ -164,8 +161,8 @@ class Controller extends ControllerCommon
 
         if (isset($datas['error']))
         {
+            $datas['result'] = SAVE_ERROR;
             $this->_datas = $datas;
-            $this->_datas['result'] = SAVE_ERROR;
             $this->_view = 'articles/article_form';
             return;
         }
@@ -193,8 +190,9 @@ class Controller extends ControllerCommon
         }
         else
         {
+            $datas['error']['DB'] = $db->errno;
+            $datas['result'] = SAVE_ERROR;
             $this->_datas = $datas;
-            $this->_datas['result'] = SAVE_ERROR;
             $this->_view = 'articles/article_form';
         }
         
@@ -203,24 +201,29 @@ class Controller extends ControllerCommon
     private function _delete()
     {
         $id = $_GET['id'];
+        $datas = array();
         
         if ( $id )
         {
             $db = Db::connect();
 
             $db->query( 'DELETE FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
-
+            
             if( !$db->errno )
             {
-                $this->_datas['result'] = REMOVE_SUCCESS;
+                $datas['error'] = null;
+                $datas['result'] = REMOVE_SUCCESS;
             }
             else
             {
-                $this->_datas['result'] = REMOVE_ERROR;
+                $datas['error']['DB'] = $db->errno;
+                $datas['result'] = REMOVE_ERROR;
             }
         }
         
         $this->_articles();
+        $this->_datas['error'] = $datas['error'];
+        $this->_datas['result'] = $datas['result'];
         $this->_view = 'articles/articles';
     }
     

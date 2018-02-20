@@ -77,7 +77,7 @@ class ErrorHandler extends Text
         }
         
         /**
-         * If the message is displayed, add javascript to close the message on click
+         * If the fixed message is displayed, add javascript to close the message on click
          */
         if ( !empty( $this->_fixedMessage ) )
         {

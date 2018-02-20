@@ -3,9 +3,9 @@
 <p><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a></p>
 
 <?php 
-if( isset( $datas ) )
+if( isset( $datas['articles'] ) )
 {
-    foreach( $datas as $row )
+    foreach( $datas['articles'] as $row )
     {
     ?>
         <article>

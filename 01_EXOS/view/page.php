@@ -9,12 +9,16 @@
     <body>
         <?php $ErrorHandler->get_fixedMessage(); ?>
         <div id="page">
-            <menu>
-                <h2>
-                    <a href="<?php echo SITE_URL; ?>/index.php?page=articles">Articles</a>
-                    <a href="<?php echo SITE_URL; ?>/index.php?page=contact">Contact</a>
-                </h2>
-            </menu>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="<?php echo SITE_URL; ?>/index.php?page=articles">Articles</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo SITE_URL; ?>/index.php?page=contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
             <main>
                 <?php include SITE_PATH . '/view/' . $view . '.php'; ?>
             </main>

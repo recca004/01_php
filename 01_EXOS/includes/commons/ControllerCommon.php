@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of ControllerCommon
  *
@@ -27,7 +21,7 @@ class ControllerCommon
     
     private function _fieldValue($fieldName)
     {
-        return ( isset( $this->_datas[$fieldName] ) ) ? $this->_datas[$fieldName] : '';
+        return ( isset( $this->_datas[$this->_page][$fieldName] ) ) ? $this->_datas[$this->_page][$fieldName] : '';
     }
     
     public function generateFormField( $fieldName, $type, $placeHolder )

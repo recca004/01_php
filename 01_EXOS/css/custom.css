@@ -1,4 +1,18 @@
+body{
+    padding: 10px 0;
+}
 
+
+/**
+* MENU
+*/
+nav ul li a{
+    transition: background 0.2s;
+}
+
+/**
+* FIXED MESSAGE DISPLAY
+*/
 #message_display{
     display: block;
     position: fixed;
@@ -50,3 +64,4 @@
 .form-invalid{
     border-color: blueviolet;
 }
+
