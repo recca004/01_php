@@ -18,7 +18,7 @@ if( isset( $datas[ 'article' ] ) )
             </p>
                         <p>
             <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php echo $row[ 'IdArticle' ]; ?>"><i class="fas fa-trash-alt" style="color:#910E1F"> Effacer</i></a>
-            <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>"><i class="fas fa-th-list" style="color:#D0C90A"> Edit</i></a> 
+            <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>"><i class="fas fa-th-list" style="color:#677E52"> Edit</i></a> 
                 
             </p>
 

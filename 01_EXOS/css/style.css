@@ -82,8 +82,8 @@ nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../ima
 nav ul li.actif em{display:block;}
 
 /* Navbar */ 
-ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: rgba(0, 90, 132, 0.88);}
+ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #FFF168;}
 ul.navbar li {float: left;}
-ul.navbar li a {display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;}
+ul.navbar li a {display: block;color: #005A84;text-align: center;padding: 14px 16px;text-decoration: none;}
 ul.navbar li a:hover {background-color: #062837;}
-.container{    background-color: rgb(238, 238, 238); padding: 25px;}
+.container{    background-color: #FFEFB6; padding: 25px;}
