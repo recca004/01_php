@@ -118,7 +118,7 @@ class Controller extends ControllerCommon {
         }
 
         $this->_view = 'articles/articles';
-        $this->_datas = $datas;
+        $this->_articles();
 
 //        $this->_view  = 'articles/article_form';
     }
@@ -181,8 +181,9 @@ class Controller extends ControllerCommon {
                 . 'WHERE IdArticle = ' . $_GET['id'];
 
         $db->query($query);
-        $this->_article($_GET ['id']);
+          $this->_articles();
         $this->_view = 'articles/articles';
+      
     }
 
 
@@ -204,7 +205,7 @@ public function _get_formUrl()
         
 
     {
-        echo SITE_URL.'/index.php?page=articles&action=insert=';
+        echo SITE_URL.'/index.php?page=articles&action=insert';
                 
     }
             }

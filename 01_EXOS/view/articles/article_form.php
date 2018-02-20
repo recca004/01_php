@@ -1,23 +1,9 @@
-<?php 
-if ( isset( $datas['article'])
-        )
-
-
+<?php
+if (isset($datas['article']))
 {
-    $formAction = 'update';
-    
-    $row = $datas['article']->fetch_array();
-$datas['TitleArticle']=$row['TitleArticle'];
-       $datas['IntroArticle']=$row['IntroArticle'];
-               $datas['ContentArticle']=$row['ContentArticle'];
-    $datas['IdArticle']=$row['IdArticle'];
-    
-}
- else {
-$formAction = 'insert'; 
-$datas['IdArticle']='';
-}
 
+    $datas = $datas['article']->fetch_array();
+}
 ?>
 
 
