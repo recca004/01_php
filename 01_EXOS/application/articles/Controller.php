@@ -11,7 +11,6 @@ class Controller extends ControllerCommon{
                 $this->_article();
                 break;
             case 'show':
-                //$this->_view  = 'articles/article_form';
                 $this->_show();
                  break;
             case 'insert':
@@ -148,14 +147,7 @@ class Controller extends ControllerCommon{
             return;
         }
         
-        /*
-        if ( count( $_POST ) == 0 )
-        {
-            $this->_article( $_GET['id'] );
-            $this->_view = 'articles/article_form';
-            return;
-        }
-        */
+
         
         if (empty( $datas[ 'TitleArticle' ] ) ){
             $datas[ 'error' ][ 'titleempty' ] = true;
@@ -186,7 +178,9 @@ class Controller extends ControllerCommon{
                 . 'ContentArticle = \''.$ContentArticle.'\' '
                 . 'WHERE IdArticle = ' . $_GET['id'];
         
+        
         $db->query($query);
+    
         
         //$this->_article( $_GET['id'] );
         $this->_articles();
