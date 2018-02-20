@@ -19,7 +19,9 @@ if( isset( $datas[ 'article' ] ) )
                 <?php echo $row[ 'ContentArticle' ]; ?>
             </p>
             <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=del&id=<?php $row[ 'IdArticle' ]; ?>">DEL article</a> 
-  <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=update&id=<?php echo $row[ 'IdArticle' ]; ?>">show article</a>
+  <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row[ 'IdArticle' ]; ?>">update</a>
+    <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=details&id=<?php echo $row[ 'IdArticle' ]; ?>">show</a>
+  
         </article>
     <?php
 }
