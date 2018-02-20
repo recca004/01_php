@@ -188,7 +188,19 @@ class Controller extends ControllerCommon{
 
      }
   
-
+     
+     public function get_formUrl()
+     {
+         if ( isset( $_GET['id'] ) )
+         {
+             echo SITE_URL . '/index.php?page=articles&action=update&id=' . $_GET['id'];
+         }
+         else
+         {
+             echo SITE_URL . '/index.php?page=articles&action=insert';
+         }
+         
+     }
 
 
 }
