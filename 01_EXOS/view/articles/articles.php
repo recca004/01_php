@@ -1,17 +1,16 @@
 <h1>Articles</h1>
+<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a>
 
-<?php 
-if( isset( $datas[ 'articles' ] ) )
-{
-    while( $row = $datas[ 'articles' ]->fetch_array() )
-    {
-    ?>
+<?php
+if (isset($datas['articles'])) {
+    while ($row = $datas['articles']->fetch_array()) {
+        ?>
         <article>
-            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $row[ 'IdArticle' ]; ?>"><?php echo $row[ 'TitleArticle' ]; ?></a></h2>
+            <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=detail&id=<?php echo $row['IdArticle']; ?>"><?php echo $row['TitleArticle']; ?></a></h2>
             <p>
-                <?php echo $row[ 'IntroArticle' ]; ?>
+        <?php echo $row['IntroArticle']; ?>
             </p>
         </article>
-    <?php
+        <?php
     }
 }
