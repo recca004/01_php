@@ -4,6 +4,7 @@
  */
 class Controller extends ControllerCommon{
     
+    
     protected function _setDatas(){
         
         switch ($this->_action){
