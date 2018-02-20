@@ -1,28 +1,25 @@
 <?php
 
-class Controller extends ControllerCommon{
+class Controller extends ControllerCommon {
 
-    
-    protected function _setDatas(){
-        
-        switch ($this->_action){
+    protected function _setDatas() {
+
+        switch ($this->_action) {
             case 'send':
-               $this->_checkMessageSent();
+                $this->_checkMessageSent();
                 break;
-                
+
             default :
                 $this->_view = 'contact/contact';
-                
+
                 break;
-            
         }
     }
-    
-    /** 
+
+    /**
      * Vérifie les champs du formulaire et envoie l'email si aucune erreur n'est trouvée
      * @return array
      */
-    
     private function _checkMessageSent() {
         $datas = array();
 
