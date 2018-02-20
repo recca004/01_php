@@ -85,5 +85,5 @@ nav ul li.actif em{display:block;}
 ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #FFF168;}
 ul.navbar li {float: left;}
 ul.navbar li a {display: block;color: #005A84;text-align: center;padding: 14px 16px;text-decoration: none;}
-ul.navbar li a:hover {background-color: #062837;}
+ul.navbar li a:hover {background-color: #FFDA8C;}
 .container{    background-color: #FFEFB6; padding: 25px;}
