@@ -18,6 +18,7 @@ class ControllerCommon
     protected $_view;
     protected $_datas;
     
+    
     function __construct( $page, $action )
     {
         $this->_page = $page;
