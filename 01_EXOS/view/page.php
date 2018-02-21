@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Articles</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo SITE_URL ?>/css/style.css" />
     </head>
     <body>
         <div id="page">
             <menu>
                 <h2>
-                    <a href="<?php echo SITE_URL ?>/index.php?page=contact">Contact</a><br>
-                    <a href="<?php echo SITE_URL ?>/index.php?page=articles">Articles</a>
+                    <a href="<?php echo SITE_URL ?>/contact">Contact</a><br>
+                    <a href="<?php echo SITE_URL ?>/articles">Articles</a>
                 </h2>
             </menu>
             <main>

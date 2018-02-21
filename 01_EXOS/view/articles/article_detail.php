@@ -10,9 +10,9 @@ if (isset($datas['article'])) {
     ?>
     <article>
 
-        <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=delete&id=<?php echo $row['IdArticle']; ?>">Supprimer l'article</a>
+        <a href="<?php echo SITE_URL; ?>/articles/delete/<?php echo $row['IdArticle']; ?>">Supprimer l'article</a>
 
-        <h2><a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=details&id=<?php echo $row['IdArticle']; ?>"><?php echo $row['TitleArticle']; ?></a></h2>
+        <h2><a href="<?php echo SITE_URL; ?>/articles/detail/<?php echo $row['IdArticle']; ?>"><?php echo $row['TitleArticle']; ?></a></h2>
         <p>
             <?php echo $row['IntroArticle']; ?>
         </p>
@@ -20,7 +20,7 @@ if (isset($datas['article'])) {
             <?php echo $row['ContentArticle']; ?>
         </p>
         <br>
-        <a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show&id=<?php echo $row['IdArticle']; ?>">Éditer l'article</a>
+        <a href="<?php echo SITE_URL; ?>/articles/update/<?php echo $row['IdArticle']; ?>">Éditer l'article</a>
     </article>
     <?php
 }
