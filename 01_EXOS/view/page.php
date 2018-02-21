@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Articles</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo SITE_URL ; ?>/css/style.css" />
     </head>
     <body>
         <div id="page">
