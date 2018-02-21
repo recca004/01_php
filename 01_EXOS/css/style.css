@@ -21,8 +21,8 @@ a:link, a:visited {color:#007db8;}
 a:hover {text-decoration:none;}
 a:focus{outline:none;}
 a img{border:none;}
-h2 a:link, h2 a:visited{text-decoration:none; color:#005A84;}
-h2 a:hover{text-decoration:none;color: #062837;}
+h2 a:link, h2 a:visited{text-decoration:none; color:#677E52;}
+h2 a:hover{text-decoration:none;color: #677E52;}
 h1{font-size:36px; line-height:52px; margin:0 0 15px 0; padding:20px 0 0 0; font-weight:bold; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc; text-transform:uppercase;}
 /*h2 {font-size:18px; margin:0 0 15px 0; padding:5px 0; font-weight:bold; color:#6A615E; text-transform:uppercase; border-top:1px solid #bbb; border-bottom:1px solid #bbb;}*/
 h2 {font-size:18px; margin:0 0 15px 0; border-bottom: 1px solid #bbb;border: none;}
@@ -82,8 +82,8 @@ nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../ima
 nav ul li.actif em{display:block;}
 
 /* Navbar */ 
-ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #ABC8E2;}
+ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #677E52;}
 ul.navbar li {float: left;}
-ul.navbar li a {display: block;color: #183152;text-align: center;padding: 14px 16px;text-decoration: none;}
-ul.navbar li a:hover {background-color: #183152;}
+ul.navbar li a {display: block;color: #B0CC99;text-align: center;padding: 14px 16px;text-decoration: none;}
+ul.navbar li a:hover {background-color: #B0CC99;}
 .container{    background-color: #FFEFB6; padding: 25px;}
