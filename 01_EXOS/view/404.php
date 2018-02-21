@@ -23,7 +23,7 @@
     <body>
         <div id="page">
             <main>
-                <h2>Vous êtes perdu ???</h2>
+                <h2>Trazis nesto??!!!</h2>
                 <a class="btn" href="">Retour à la page d'accueil</a>
             </main>
         </div>

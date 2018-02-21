@@ -16,14 +16,16 @@ class ControllerCommon {
 
     protected $_page;
     protected $_action;
+    protected $router;
     protected $_view;
     protected $_datas;
         
     
-    public function __construct($page, $action){
+    public function __construct($page, $action, $router){
         $this->_page=$page;
         $this->_action=$action;
-        $this->_setDatas();
+        $this->_router=$router;
+           $this->_setDatas();
     }
     
     

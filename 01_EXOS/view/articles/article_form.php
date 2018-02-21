@@ -1,15 +1,24 @@
 <?php
+
+
+/*echo '<pre>',var_dump($datas),'</pre>';*/
+
+
+/*
 if (isset($datas['article']))
 {
 
-    $datas = $datas['article']->fetch_array();
-}
+    
+    
+    
+    echo '<pre>',var_dump($datas),'</pre>';
+}*/
 ?>
 
 
 <h1>Articles</h1>
 
-<form action="<?php $Controller->_get_formUrl(); ?>" method="post">
+<form action="<?php echo $datas['formUrl']; ?>" method="post">
     <label for="TitleArticle">
         <?php echo ( isset( $datas[ 'error' ][ 'titleempty' ] ) ) ? '<span class="alert">Aucun titre n\'a été indiqué.</span><br />' : ''; ?>
         <input type="text" name="TitleArticle" id="TitleArticle" value="<?php echo ( isset( $datas['TitleArticle'] ) ) ? $datas['TitleArticle'] : ''; ?>" placeholder="Titre de l'article" />
