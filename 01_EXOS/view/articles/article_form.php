@@ -5,7 +5,7 @@ if (isset($datas['article'])) {
 ?>
 <h1>Articles</h1>
 
-<form action="<?php $Controller->get_formUrl(); ?>" method="post">
+<form action="<?php echo $datas['formUrl']; ?>" method="post">
     <label for="TitleArticle">
 <?php echo ( isset($datas['error']['titleempty']) ) ? '<span class="alert">Aucun titre n\'a été indiqué.</span><br />' : ''; ?>
         <input type="text" name="TitleArticle" id="TitleArticle" value="<?php echo ( isset($datas['TitleArticle']) ) ? $datas['TitleArticle'] : ''; ?>" placeholder="Titre de l'article" />

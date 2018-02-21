@@ -10,6 +10,7 @@ class Controller extends ControllerCommon {
                 break;
             case 'show':
                 $this->_show();
+                $this->_formUrl();
                 break;
             case 'insert':
                 $this->_insert();
@@ -20,8 +21,6 @@ class Controller extends ControllerCommon {
             case 'update':
                 $this->_update();
                 break;
-
-
             default :
                 $this->_articles();
                 break;
@@ -65,19 +64,16 @@ class Controller extends ControllerCommon {
         if (empty($datas['TitleArticle'])) {
             $datas['error']['titleempty'] = true;
         }
-
         if (empty($datas['IntroArticle'])) {
             $datas['error']['introempty'] = true;
         }
-
         if (empty($datas['ContentArticle'])) {
             $datas['error']['contentempty'] = true;
         }
-
         if (isset($datas['error'])) {
             $this->_view = 'articles/article_form';
             $this->_datas = $datas;
-            return;
+            return false;
         }
 
         $db = Db::connect();
@@ -93,7 +89,7 @@ class Controller extends ControllerCommon {
         if ($db->errno) {
             $this->_view = 'articles/article_form';
             $this->_datas = $datas;
-            return;
+            return false;
         }
 
 
@@ -169,12 +165,13 @@ class Controller extends ControllerCommon {
         $this->_view = 'articles/article_form';
     }
 
-    public function get_formUrl() {
+    public function _formUrl() {
 
         if (isset($_GET['id'])) {
-            echo SITE_URL . ' /index.php?page=articles&action=update&id=' . $_GET['id'];
+          $this->_datas = $this->_datas['article']->fetch_array();
+          $this->_datas['formUrl'] = SITE_URL . '/articles/update/' . $_GET['id'];
         } else {
-            echo SITE_URL . ' /index.php?page=articles&action=insert';
+            $this->_datas['formUrl'] =  SITE_URL . '/articles/insert';
         }
     }
 
