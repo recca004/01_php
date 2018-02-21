@@ -1,6 +1,6 @@
 <h1>Contact</h1>
 
-<form action="<?php echo SITE_URL; ?>/index.php?page=contact&action=send" method="post">
+<form action="<?php echo SITE_URL; ?>/contact/send" method="post">
     <label for="email">
         <?php echo ( isset( $datas[ 'error' ][ 'emailempty' ] ) ) ? '<span class="alert">Aucune adresse n\'a été indiquée</span><br />' : ''; ?>
         <?php echo ( isset( $datas[ 'error' ][ 'emailformat' ] ) ) ? '<span class="alert">Le format de l\'adresse n\'est pas conforme.</span><br />' : ''; ?>

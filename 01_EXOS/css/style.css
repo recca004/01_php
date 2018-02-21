@@ -2,9 +2,9 @@ html{font-size:100%;}
 body{background:#fff; line-height:2em; font-size:12px; margin:0px; padding:10px 0 0 0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
 *{outline:0;}
 
-div#page{width:960px; margin:0px auto; /*box-shadow:0px 0px 10px #ddd;*/ min-height:400px;}
+div#page{width:960px; margin:0px auto; box-shadow:0px 0px 10px #ddd; min-height:400px;}
 main{display:block; padding:35px 0; margin:0 40px;}
-article{/*margin:30px 0 60px 0;*/margin: 20px 0 0 0;}
+article{margin:30px 0 60px 0;}
 nav{border-top:1px solid #ddd; border-bottom:1px solid #ddd; margin:0 0 30px 0;}
 
 /********************************************************************************* 
@@ -21,11 +21,10 @@ a:link, a:visited {color:#007db8;}
 a:hover {text-decoration:none;}
 a:focus{outline:none;}
 a img{border:none;}
-h2 a:link, h2 a:visited{text-decoration:none; color:#005A84;}
-h2 a:hover{text-decoration:none;color: #062837;}
+h2 a:link, h2 a:visited{text-decoration:none; color:#007db8;}
+h2 a:hover{text-decoration:underline;}
 h1{font-size:36px; line-height:52px; margin:0 0 15px 0; padding:20px 0 0 0; font-weight:bold; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc; text-transform:uppercase;}
-/*h2 {font-size:18px; margin:0 0 15px 0; padding:5px 0; font-weight:bold; color:#6A615E; text-transform:uppercase; border-top:1px solid #bbb; border-bottom:1px solid #bbb;}*/
-h2 {font-size:18px; margin:0 0 15px 0; border-bottom: 1px solid #bbb;border: none;}
+h2 {font-size:24px; margin:0 0 15px 0; padding:5px 0; font-weight:bold; color:#6A615E; text-transform:uppercase; border-top:1px solid #bbb; border-bottom:1px solid #bbb;}
 h3 {font-size:14px; margin:14px 0 8px 0; font-weight:normal; color:#000;}
 h4 {}
 h5 {}
@@ -81,9 +80,4 @@ nav ul li.actif a{box-shadow:0px 0px 3px #999; border-color:#fff;}
 nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
 nav ul li.actif em{display:block;}
 
-/* Navbar */ 
-ul.navbar {list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: rgba(0, 90, 132, 0.88);}
-ul.navbar li {float: left;}
-ul.navbar li a {display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;}
-ul.navbar li a:hover {background-color: #062837;}
-.container{    background-color: rgb(238, 238, 238); padding: 25px;}
+
