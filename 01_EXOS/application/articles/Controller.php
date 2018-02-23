@@ -12,6 +12,7 @@ class Controller extends ControllerCommon{
                 break;
             case 'show':
                 $this->_show();
+                $this->_formUrl();
                  break;
             case 'insert':
                 $this->_insert();
@@ -49,7 +50,7 @@ class Controller extends ControllerCommon{
     private function _article()
     {
         
-        $id = $_GET['id'];
+        $id = $this->_router;
         
         $datas = array();
 
@@ -69,9 +70,9 @@ class Controller extends ControllerCommon{
     
     private function _show()
     {
-        if ( isset( $_GET['id'] ) && !empty( $_GET['id'] ) && is_numeric($_GET['id']) )
+        if ( !empty( $this->_router ) && is_numeric( $this->_router ) )
         {
-            $this->_article( $_GET['id'] );
+            $this->_article( $this->_router );
             
         }
         $this->_view = 'articles/article_form';
@@ -96,7 +97,7 @@ class Controller extends ControllerCommon{
         {
             $this->_view  = 'articles/article_form';
             $this->_datas = $datas;
-            return;
+            return false;
         }
             
         $db = Db::connect();
@@ -112,7 +113,7 @@ class Controller extends ControllerCommon{
         {
             $this->_view  = 'articles/article_form';
             $this->_datas = $datas;
-            return;
+            return false;
         }
 
         $this->_view  = 'articles/articles';
@@ -122,7 +123,7 @@ class Controller extends ControllerCommon{
     private function _del(){
     
         $db = Db::connect();        
-        $id=$db->real_escape_string($_GET['id']);
+        $id=$db->real_escape_string($this->_router);
         $query='DELETE FROM articles WHERE IdArticle ='.$id;
         $db->query($query);
         
@@ -140,7 +141,7 @@ class Controller extends ControllerCommon{
     {
         $datas = $_POST;
         
-        if ( empty( $_GET['id'] ) && !is_numeric($_GET['id']) )
+        if ( empty( $this->_router ) && !is_numeric( $this->_router ) )
         {
             $this->_view = 'articles/article_form';
             $this->_datas = $datas;
@@ -176,7 +177,7 @@ class Controller extends ControllerCommon{
                 . 'TitleArticle = \''.$TitleArticle.'\', '
                 . 'IntroArticle = \''.$IntroArticle.'\', '
                 . 'ContentArticle = \''.$ContentArticle.'\' '
-                . 'WHERE IdArticle = ' . $_GET['id'];
+                . 'WHERE IdArticle = ' . $this->_router;
         
         
         $db->query($query);
@@ -189,15 +190,18 @@ class Controller extends ControllerCommon{
      }
   
      
-     public function get_formUrl()
+     private function _formUrl()
      {
-         if ( isset( $_GET['id'] ) )
+         if ( !empty( $this->_router ) )
          {
-             echo SITE_URL . '/index.php?page=articles&action=update&id=' . $_GET['id'];
+             $this->_datas = $this->_datas['article']->fetch_array();
+             
+             $this->_datas['formUrl'] = SITE_URL . '/articles/update/' . $this->_router;
+         
          }
          else
          {
-             echo SITE_URL . '/index.php?page=articles&action=insert';
+             $this->_datas['formUrl'] = SITE_URL . '/articles/insert';
          }
          
      }
