@@ -79,5 +79,3 @@ nav ul li a:hover{color:#222 !important; background:#f5f5f5;}
 nav ul li.actif a{box-shadow:0px 0px 3px #999; border-color:#fff;}
 nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
 nav ul li.actif em{display:block;}
-
-

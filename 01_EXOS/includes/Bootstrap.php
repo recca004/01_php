@@ -13,9 +13,9 @@
  */
 
 class Bootstrap{
-public static $_page;
-public static $_action;
-public static $_router;
+public static $page;
+public static $action;
+public static $router;
 public static function url()
 {
 $router = ( empty( $_GET['page'] ) ) ? 'articles' : $_GET['page'];
@@ -26,7 +26,7 @@ self::$page = ( isset( $parts[0] ) ) ? $parts[0] : '';
 self::$action = ( isset( $parts[1] ) ) ? $parts[1] : '';
 self::$router = ( isset( $parts[2] ) ) ? $parts[2] : '';
 }
-if( !file_exists( SITE_PATH. '/application/' .self::$_page.
+if( !file_exists( SITE_PATH. '/application/' .self::$page.
 '/Controller.php' ) )
 {
 header('HTTP/1.0 404 NOT FOUND');
