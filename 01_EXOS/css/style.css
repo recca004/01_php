@@ -5,8 +5,11 @@ body{background:#fff; line-height:2em; font-size:12px; margin:0px; padding:10px 
 div#page{width:960px; margin:0px auto; box-shadow:0px 0px 10px #ddd; min-height:400px;}
 main{display:block; padding:35px 0; margin:0 40px;}
 article{margin:30px 0 60px 0;}
-nav{border-top:1px solid #ddd; border-bottom:1px solid #ddd; margin:0 0 30px 0;}
-
+/*nav{border-top:1px solid #ddd; border-bottom:1px solid #ddd; margin:0 0 30px 0;}*/
+nav {
+    background: rgba(0, 0, 255, 0.55) !important; 
+    height: 55px;
+}
 /********************************************************************************* 
 *
 *      MISE EN FORME
@@ -69,15 +72,49 @@ label.inline-block{display:inline-block; width:150px; padding:5px 0; text-align:
 .append{border-radius:0px 8px 8px 0px;}
 
 .caption{font-size: 10px; font-style: italic;}
-
+;
 
 /* menu */
+
 nav ul{list-style:none; padding:0; height:56px; margin:0;}
-nav ul li{}
-nav ul li a{display:block; float:left; text-transform:uppercase; line-height:56px; text-align:center; padding:0 60px; text-decoration:none; color:#777 !important; font-weight:bold; font-size:12px; transition:background 1s;}
+nav ul li{list-style: none; padding: 5px; height: 55px; display: inline;}
+nav ul li a{display:block; float:left; text-transform:uppercase; line-height:56px; text-align:center; padding:0 60px; 
+   text-decoration:none; color:#000 !important; font-weight:bold; font-size:12px; transition:background 1s;}
+nav ul li a:hover{color: #ff4d4d !important; background:#f5f5f5;}
+nav ul li.actif a{box-shadow:0px 0px 3px #999; }
+nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
+nav ul li.actif em{display:block;}
+
+@media only screen and (max-width: 450px){
+ 
+  body{background:#ccd9ff; line-height:2em; font-size:12px; margin:0px; padding:10px 0 0 0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+  
+    
+    nav {
+    background: rgb(255, 179, 179) !important; 
+    height: 120px;
+}
+nav ul{list-style:none; padding:0; height:56px; margin:10px;}
+nav ul li{display: block;}
+nav ul li a{display:block; float:left; text-transform:uppercase; line-height:56px;
+            text-align:center; padding:0 60px; text-decoration:none; color:#000 !important; font-weight:bold; font-size:12px; transition:background 1s;}
 nav ul li a:hover{color:#222 !important; background:#f5f5f5;}
 nav ul li.actif a{box-shadow:0px 0px 3px #999; border-color:#fff;}
 nav ul li em{display:none; position:absolute; bottom:-8px; background:url(../images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
 nav ul li.actif em{display:block;}
 
+div#page{width:430px; margin:0px auto; box-shadow:0px 0px 10px #ddd; min-height:400px;}
+main{display:block; padding:35px 0; margin:0 40px;}
+article{margin:30px 0 60px 0;}
 
+fieldset{border:1px solid #9999ff; border-radius:4px; background:#ccd9ff; margin:5px;}
+legend{}
+input, select, textarea{border:1px solid #9999ff; border-radius:5px; padding:5px; vertical-align:top; margin:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+textarea{width:300px; height:250px;}
+input:focus, select:focus, textarea:focus, input.focus, select.focus, textarea.focus{border:1px solid green;}
+input.alert, select.alert, textarea.alert{border:1px solid red;}
+input[type="text"], select{width:300px;}
+input.medium, select.medium{width:50px;}
+input.small, select.small{width:50px;}
+}

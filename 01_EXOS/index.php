@@ -6,8 +6,9 @@ define ( 'SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . $site_url );
 $urlPath=(isset($_GET['page'])) ? $_GET['page'] : '';
 
 
-
-
+include SITE_PATH . '/includes/Bootstrap.php';
+Bootstrap::url();
+/*
 $url = explode ( '/' ,$urlPath);
 
 
@@ -33,19 +34,16 @@ if ( !file_exists ( SITE_PATH . '/application/' . $page . '/Controller.php'))
     include SITE_PATH . '/view/404.php';
     exit;
     
-}
+}*/
 
 
-echo $page;
-echo $action;
-echo $router;
 
 
 include SITE_PATH . '/includes/Db.php';
 include SITE_PATH . '/includes/commons/ControllerCommon.php';
-include SITE_PATH . '/application/'.$page.'/Controller.php';
+include SITE_PATH . '/application/'.  Bootstrap::$page.'/Controller.php';
 
-$Controller = new Controller($page, $action, $router);
+$Controller = new Controller(bootstrap::$page,  Bootstrap:: $action,  Bootstrap:: $router);
 
 $datas=$Controller->get_datas();
 $view=$Controller->get_view();
