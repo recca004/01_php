@@ -6,6 +6,7 @@ define ( 'SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . $site_url );
 $urlPath = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '';
 
 
+<<<<<<< HEAD
 $url = explode( '/', $urlPath );
 
 $page   = ( !empty( $url[0] ) ) ? $url[0] : 'articles';
@@ -31,5 +32,19 @@ $Controller = new Controller($page, $action, $router);
 $datas = $Controller->get_datas();
 $view = $Controller->get_view();
 //var_dump($datas);
+=======
+include SITE_PATH . '/includes/Db.php';
+include SITE_PATH . '/includes/commons/ControllerCommon.php';
+
+include SITE_PATH . '/application/'.$page.'/Controller.php';
+
+$Controller = new Controller($page, $action);
+
+$datas  = $Controller->get_Datas();
+$view   = $Controller->get_view();
+
+//echo '<pre>',var_dump($datas),'</pre>';
 
 include SITE_PATH . '/view/page.php';
+>>>>>>> atelier2
+

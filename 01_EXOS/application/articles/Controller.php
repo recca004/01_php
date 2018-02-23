@@ -1,13 +1,19 @@
 <?php
+<<<<<<< HEAD
 /**
  * Page article 
  */
 class Controller extends ControllerCommon{
+=======
+class Controller extends ControllerCommon{
+
+>>>>>>> atelier2
     
     protected function _setDatas(){
         
         switch ($this->_action){
             case 'detail':
+<<<<<<< HEAD
                 $this->_article();
                 break;
             case 'show':
@@ -25,10 +31,26 @@ class Controller extends ControllerCommon{
                 break;
             default :
                 $this->_articles();
+=======
+                $this->_datas = $this->_article($_GET['id']);
+                break;
+            case 'show':
+                $this->_view = 'articles/article_form';
+                break;
+            case 'insert':
+                $this->_insert();
+                break;
+            default :
+                $this->_datas =  $this->_articles();
+>>>>>>> atelier2
                 break;
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> atelier2
     private function _articles()
     {
         $datas = array();
@@ -42,8 +64,14 @@ class Controller extends ControllerCommon{
             $datas[ 'articles' ] = $results;
         }
 
+<<<<<<< HEAD
         $this->_view  = 'articles/articles';
         $this->_datas = $datas;
+=======
+        $this->_view = 'articles/articles';
+
+        return $datas;
+>>>>>>> atelier2
     }
 
 
@@ -63,6 +91,7 @@ class Controller extends ControllerCommon{
             $datas[ 'article' ] = $results;
         }
 
+<<<<<<< HEAD
         $this->_view  = 'articles/article_detail';
         $this->_datas = $datas;
     }
@@ -100,6 +129,17 @@ class Controller extends ControllerCommon{
             return false;
         }
             
+=======
+        $this->_view = 'articles/article_detail';
+
+        return $datas;
+    }
+    
+    private function _articleshow( $id ){
+        
+        $datas = array();
+
+>>>>>>> atelier2
         $db = Db::connect();
          
         $TitleArticle=$db->real_escape_string($datas['TitleArticle']);
@@ -116,6 +156,7 @@ class Controller extends ControllerCommon{
             return false;
         }
 
+<<<<<<< HEAD
         $this->_view  = 'articles/articles';
         $this->_articles();
        
@@ -207,4 +248,34 @@ class Controller extends ControllerCommon{
      }
 
 
+=======
+        //$datas[ 'view' ] = 'articles/article_form';
+        $this->_view = 'contact/contact';
+
+        return $datas;
+    }
+    
+    
+    private function _insert()
+    {        
+        $datas = $_POST;
+        
+        $db = Db::connect();
+        
+        $TitleArticle   = $db->real_escape_string( $datas['TitleArticle'] );
+        $IntroArticle   = $db->real_escape_string( $datas['IntroArticle'] );
+        $ContentArticle = $db->real_escape_string( $datas['ContentArticle'] );
+        
+        $query = 'INSERT INTO articles VALUES( NULL, \''.$TitleArticle.'\', \''.$IntroArticle.'\', \''.$ContentArticle.'\'  )';
+        
+        $db->query( $query );
+        
+        $this->_view = 'articles/articles';
+        $this->_datas = $this->_articles();
+        //$this->_view = 'articles/article_form';
+
+        
+    }
+    
+>>>>>>> atelier2
 }

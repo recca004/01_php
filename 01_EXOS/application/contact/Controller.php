@@ -4,6 +4,10 @@
  */
 class Controller extends ControllerCommon{
 
+<<<<<<< HEAD
+=======
+class Controller extends ControllerCommon{
+>>>>>>> atelier2
 
     
     protected function _setDatas(){
@@ -20,6 +24,7 @@ class Controller extends ControllerCommon{
         }
     }
     
+<<<<<<< HEAD
     /**
      * Vérifie les champs du formulaire et envoi si aucune erreur n'est trouvée
      * @param string $action 
@@ -32,6 +37,17 @@ class Controller extends ControllerCommon{
     {
         $datas = array();
 
+=======
+    
+    /**
+     * Vérifie les champs du formulaire et envoie l'email si aucune erreur n'est trouvée
+     * @return array
+     */
+    private function _checkMessageSent()
+    {
+        $datas = array();
+  
+>>>>>>> atelier2
         if($this->_action === 'send' )
         {
             $datas = $_POST;
@@ -60,11 +76,16 @@ class Controller extends ControllerCommon{
             }
             else
             {
+<<<<<<< HEAD
                 $this->_view  = 'contact/contact';
+=======
+                $this->_view = 'contact/contact';
+>>>>>>> atelier2
             }
         }
         else
         {
+<<<<<<< HEAD
             $this->_view  = 'contact/contact';
         }
 
@@ -73,6 +94,15 @@ class Controller extends ControllerCommon{
     }
     
 
+=======
+            $this->_view = 'contact/contact';
+        }
+
+        $this->_datas = $datas;
+    }
+
+   
+>>>>>>> atelier2
 }
     
     
