@@ -70,7 +70,7 @@ class Controller extends ControllerCommon{
     
     private function _show()
     {
-        if ( !empty( $this->_router ) && is_numeric($this->_router) )
+        if ( !empty($this->_router) && is_numeric($this->_router) )
         {
             $this->_article($this->_router );
             
