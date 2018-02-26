@@ -24,7 +24,7 @@
         <div id="page">
             <main>
                 <h2>Vous êtes perdu ???</h2>
-                <a class="btn" href="<?php echo SITE_URL; ?>">Retour à la page d'accueil</a>
+                <a class="btn" href="<?php SITE_URL; ?>/">Retour à la page d'accueil</a>
             </main>
         </div>
     </body>

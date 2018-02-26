@@ -1,4 +1,6 @@
 <?php
+namespace application\contact;
+use includes\commons\ControllerCommon;
 /**
  * Page contact 
  */
@@ -11,6 +13,9 @@ class Controller extends ControllerCommon{
         switch ($this->_action){
             case 'send':
                 $this->_checkMessageSent();
+                break;
+            case 'address':// add module controler for template
+                $this->_view = 'contact/address';
                 break;
                 
             default :

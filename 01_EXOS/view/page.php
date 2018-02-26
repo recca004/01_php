@@ -8,12 +8,17 @@
     </head>
     <body>
         <div id="page">
-     
-            <a href="<?php echo SITE_URL ; ?>/articles"> Home </a>
-            <a href="<?php echo SITE_URL ; ?>/contact" > Contact </a>
+                <?php self::includeModule('menus','main'); ?>
+
             <main>
-                <?php include SITE_PATH . '/view/'.$view.'.php'; ?>
+                <?php self::includeModule(Bootstrap::$page, Bootstrap::$action, Bootstrap::$router); ?>
             </main>
+            <footer>
+                  <?php 
+                  self::includeModule('contact', 'address'); ?>
+                <?php 
+                  self::includeModule('menus', 'footer'); ?>
+            </footer>
         </div>
     </body>
 </html>

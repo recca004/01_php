@@ -19,17 +19,16 @@ class Bootstrap {
 
     public static function url() {
 
-        $router = ( empty($_GET['page']) ) ? 'articles' : $_GET['page'];
-        if (!empty($router)) {
+        $router = ( empty($_GET['page']) ) ? '' : $_GET['page'];
+  
             $parts = explode('/', $router);
-            self::$page = ( empty($parts[0]) ) ? $parts[0] : 'articles';
+            self::$page = ( !empty($parts[0]) ) ? $parts[0] : 'articles';
             self::$action = ( isset($parts[1]) ) ? $parts[1] : '';
             self::$router = ( isset($parts[2]) ) ? $parts[2] : '';
-        }
-        if (!file_exists(SITE_PATH . '/application/' . self::$page .
-                        '/Controller.php')) {
+ 
+        if (!file_exists(SITE_PATH . '/application/' . self::$page . '/Controller.php')) {
             header('HTTP/1.0 404 NOT FOUND');
-            include SITE_PATH . '/view/404.html';
+            include SITE_PATH . '/view/404.php';
             exit;
         }
     }

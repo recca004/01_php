@@ -1,4 +1,9 @@
 <?php
+namespace includes;
+/*
+ * Add Mysqli support 
+ */
+use mysqli;
 Class Db{
     
     private static $_connect;
@@ -9,6 +14,7 @@ Class Db{
         {
             $config = parse_ini_file( SITE_PATH . '/includes/config.ini' ); 
 
+            
             self::$_connect = new mysqli( $config['dbhost'], $config['dbuser'], $config['dbpass'], $config['dbname'], $config['dbport'] );
         
         }
