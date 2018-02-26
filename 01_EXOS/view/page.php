@@ -7,15 +7,16 @@
     </head>
     <body>
         <div id="page">
-            <menu>
-                <h2>
-                    <a href="<?php echo SITE_URL ?>/contact">Contact</a><br>
-                    <a href="<?php echo SITE_URL ?>/articles">Articles</a>
-                </h2>
-            </menu>
+            <?php self::includeModule('menus'); ?>
             <main>
-                <?php include SITE_PATH . '/view/'.$view.'.php'; ?>
+                <?php self::includeModule(Bootstrap::$page, Bootstrap::$action, Bootstrap::$router); ?>
             </main>
+
+            <footer>
+                <?php self::includeModule('contact', 'address'); ?>
+
+                <?php self::includeModule('menus', 'footer'); ?>
+            </footer>
         </div>
     </body>
 </html>

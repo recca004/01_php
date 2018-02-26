@@ -20,7 +20,7 @@ if (isset($datas['article'])) {
             <?php echo $row['ContentArticle']; ?>
         </p>
         <br>
-        <a href="<?php echo SITE_URL; ?>/articles/update/<?php echo $row['IdArticle']; ?>">Éditer l'article</a>
+        <a href="<?php echo SITE_URL; ?>/articles/show/<?php echo $row['IdArticle']; ?>">Éditer l'article</a>
     </article>
     <?php
 }

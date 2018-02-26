@@ -1,4 +1,7 @@
 <?php
+namespace application\contact;
+
+use includes\commons\ControllerCommon;
 
 class Controller extends ControllerCommon {
 
@@ -7,6 +10,9 @@ class Controller extends ControllerCommon {
         switch ($this->_action) {
             case 'send':
                 $this->_checkMessageSent();
+                break;
+            case 'address':
+                $this->_view = 'contact/address';
                 break;
 
             default :
