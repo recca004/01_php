@@ -29,10 +29,10 @@ class ModelPosts {
     }
 
 
-    public function article()
+    public function article( $id )
     {
-        
-        $id = $this->_router;
+       //$id= $idArticle;
+//        $id = $this->_router;
         
         $datas = array();
 
@@ -45,7 +45,6 @@ class ModelPosts {
             $datas[ 'article' ] = $results;
         }
 
-        
         return $datas;
     }
     
@@ -57,7 +56,7 @@ class ModelPosts {
         if ( !empty($id) && is_numeric($id) )
         {
             $article = $this->article($id );
-            $article->fetch_array();
+            //$article->fetch_array();
              
             $datas['formUrl'] = SITE_URL . '/articles/update/' . $id;
            
