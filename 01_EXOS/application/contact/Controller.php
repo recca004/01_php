@@ -1,4 +1,7 @@
 <?php
+namespace application\contact;
+
+use includes\commons\ControllerCommon;
 
 class Controller extends ControllerCommon
 {
@@ -17,35 +20,36 @@ class Controller extends ControllerCommon
     {
         $datas = array();
 
-        if($this->_action === 'send' )
+        if( $this->_action === 'send' )
         {
-            $datas = $_POST;
+            $datas['contact'] = $_POST;
             
-            if( empty( $_POST[ 'email' ] ) )
+            if( empty( $datas['contact'][ 'email' ] ) )
             {
-                $datas[ 'error' ][ 'email' ] = 'empty';
+                $datas[ 'error' ][ 'email' ] = ERROR_TYPE_EMPTY;
             }
-            else if( !filter_var( $_POST[ 'email' ], FILTER_VALIDATE_EMAIL ) )
+            else if( !filter_var( $datas['contact'][ 'email' ], FILTER_VALIDATE_EMAIL ) )
             {
-                $datas[ 'error' ][ 'email' ] = 'invalid';
+                $datas[ 'error' ][ 'email' ] = ERROR_TYPE_INVALID;
             }
-            if( empty( $_POST[ 'message' ] ) )
+            if( empty( $datas['contact'][ 'message' ] ) )
             {
-                $datas[ 'error' ][ 'message' ] = 'empty';
+                $datas[ 'error' ][ 'message' ] = ERROR_TYPE_EMPTY;
             }
 
             if ( isset($datas['error']) )
             {
-                $this->_datas = $datas;
-                $this->_datas['result'] = SEND_ERROR;
+                $datas['result'] = SEND_ERROR;
                 $this->_view = 'contact/contact';
-                return;
             }
-            // send message by mail
-            // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
-            
-            $this->_datas['result'] = SEND_SUCCESS;
-            $this->_view = 'contact/contact_sent';
+            else
+            {
+                // send message by mail
+                // mail( 'mymail@domain.net', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+
+                $datas['result'] = SEND_SUCCESS;
+                $this->_view = 'contact/contact_sent';
+            }
         }
         else
         {
@@ -53,6 +57,9 @@ class Controller extends ControllerCommon
         }
 
         $this->_datas = $datas;
+        
+        $this->displayResultMessage();
+        
     }
     
     

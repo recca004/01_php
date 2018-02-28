@@ -1,56 +1,72 @@
 <?php
+namespace includes\commons;
 
 /**
  * Description of ControllerCommon
  *
  * @author PA6
  */
-class ControllerCommon
+class ControllerCommon extends Text
 {
     protected $_page;
     protected $_action;
     protected $_view;
     protected $_datas;
+    protected $_router;
     
-    function __construct( $page, $action )
+    
+    function __construct( $page, $action, $router )
     {
         $this->_page = $page;
         $this->_action = $action;
+        $this->_router = $router;
         $this->_setDatas();
     }
     
-    private function _fieldValue($fieldName)
-    {
-        return ( isset( $this->_datas[$this->_page][$fieldName] ) ) ? $this->_datas[$this->_page][$fieldName] : '';
-    }
-    
-    public function generateFormField( $fieldName, $type, $placeHolder )
+    public function displayResultMessage()
     {
         
-        $Err = new ErrorHandler( $this->_datas );
+        if ( !empty( $this->_datas['result'] ) )
+        {
+            
+            $errorMessage = '';
+            
+            if ( !empty( $this->_datas['error'] ) )
+            {
+                $class = 'error';
+            
+                /**
+                 * Check all error
+                 */
+                foreach ( $this->_datas['error'] as $field => $type)
+                {
+
+                    /**
+                     * Get the text if set
+                     */
+                    if ( isset( $this->_textForm[$field][$type] ) )
+                    {
+                        $errorMessage.= '- ' . $this->_textForm[$field][$type] . '<br>';
+                    }
+                    else
+                    {
+                        $errorMessage.= '- ' . str_replace(['#field#', '#type#'], [$field, $type], TEXT_MISSING_FIELD) . '<br>';
+                    }
+                    
+                }
+            }
+            else
+            {
+                $class = 'success';
+            }
+
+            echo '<div id="message_display" class="' . $class . '"><p class="' . $class . '">'
+                . $this->_datas['result'] . '<br>' . $errorMessage
+                . '</div>'
+                . '<script>document.getElementById("message_display").onclick=function(){this.classList.add("hide");};</script>';
+            
+        }
         
-        if ( $type == 'text' )
-        {
-            echo    '<label for="' . $fieldName . '">'
-                    . $Err->get_message($fieldName)
-                    . '<input type="' . $type . '" class="' . $Err->get_class($fieldName) . '" '
-                    . 'name="' . $fieldName . '" '
-                    . 'id="' . $fieldName . '" '
-                    . 'value="' . $this->_fieldValue($fieldName) . '" '
-                    . 'placeholder="' . $placeHolder . '" />'
-                    . '</label>';
-        }
-        else if ( $type == 'textarea' )
-        {
-            echo    '<label for="' . $fieldName . '">'
-                    . $Err->get_message($fieldName)
-                    . '<textarea class="' . $Err->get_class($fieldName) . '" '
-                    . 'name="' . $fieldName . '" '
-                    . 'id="' . $fieldName . '" '
-                    . 'placeholder="' . $placeHolder . '" />'
-                    . $this->_fieldValue($fieldName)
-                    . '</textarea></label>';
-        }
     }
     
     public function get_datas()

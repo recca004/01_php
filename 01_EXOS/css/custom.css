@@ -2,6 +2,38 @@ body{
     padding: 10px 0;
 }
 
+div#page{
+    width: auto;
+    max-width: 960px;
+}
+
+main{
+    clear: both;
+}
+
+h2{
+    border-top : 0;
+}
+
+a.button{
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    vertical-align: top;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    /*box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.1s;
+    */
+}
+a.button:hover{
+    background-color: #e5e5e5;
+    /*box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    */
+}
+
 
 /**
 * MENU
@@ -20,32 +52,51 @@ nav ul li a{
     left: 50%;
     width: 500px;
     margin: 0 0 0 -250px;
-    padding: 10px 15px;
-    text-align: left;
-    line-height: 20px;
-    font-size: 1.0em;
-    font-weight: bold;
     border: 2px solid black;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
 }
+#message_display p{
+    margin: 0;
+    padding: 10px 15px;
+    line-height: 20px;
+    font-size: 1.0em;
+    font-weight: bold;
+}
 
 #message_display.success{
-    color: green;
     border-color: green;
+}
+#message_display p.success{
+    color: green;
 }
 
 #message_display.error{
-    color: red;
     border-color: red;
+}
+#message_display p.error{
+    color: red;
 }
 
 #message_display.hide{
     display: none;
 }
 
+/**
+ * ARTICLES
+ */
+article{
+    background-color: #f9f9f9;
+    margin: 30px 0;
+    padding: 5px 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3) inset;
+}
 
+.article_action{
+    float: right;
+    margin-top: 4px;
+}
 
 
 .error,
@@ -65,3 +116,43 @@ nav ul li a{
     border-color: blueviolet;
 }
 
+
+/**
+ * WIDGET METEO
+ */
+.widget.meteo{
+    overflow: hidden;
+    width: 380px;
+    height: 170px;
+    float: right;
+    padding: 10px;
+    margin: 0 40px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s;
+}
+.widget.meteo .title{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.widget.meteo input[type=text]{
+    width: 300px;
+    border-radius: 5px 0 0 5px;
+}
+.widget.meteo input[type=submit]{
+    border-radius: 0 5px 5px 0;
+}
+.meteoButtonHide{
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.meteo.hide{
+    height: 22px;
+}
+.ng-hide {
+    height: 22px;
+}

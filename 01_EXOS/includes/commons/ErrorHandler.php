@@ -60,9 +60,9 @@ class ErrorHandler extends Text
             /**
              * Set the fixed message display (if error)
              */
-            $this->_fixedMessage = '<div id="message_display" class="error">'
+            $this->_fixedMessage = '<div id="message_display" class="error"><p class="error">'
                 . $message
-                . '</div>';
+                . '</p></div>' . "\n";
             
         }
         else if ( isset( $this->_datas['result'] ) )
@@ -71,9 +71,9 @@ class ErrorHandler extends Text
             /**
              * Set the fixed message display (if no error)
              */
-            $this->_fixedMessage = '<div id="message_display" class="success">'
+            $this->_fixedMessage = '<div id="message_display" class="success"><p class="success">'
                 . $this->_datas['result']
-                . '</div>';
+                . '</p></div>' . "\n";
         }
         
         /**
@@ -81,7 +81,7 @@ class ErrorHandler extends Text
          */
         if ( !empty( $this->_fixedMessage ) )
         {
-            $this->_fixedMessage.= '<script>document.getElementById("message_display").onclick=function(){this.classList.add("hide");};</script>';
+            $this->_fixedMessage.= '<script>document.getElementById("message_display").onclick=function(){this.classList.add("hide");};</script>' . "\n";
         }
         
     }
