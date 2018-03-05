@@ -39,19 +39,19 @@ class Controller extends ControllerCommon{
                  break;
             case 'del':
                 $this->_datas=$modelPosts->del($this->_router);
-                $this->_datas = $modelPosts->article();
+                $this->_datas = $modelPosts->articles();
                 $this->_view  = 'articles/articles';
                 break;
             case 'update':
                 $this->_datas=$modelPosts->update($this->_router);
-                if (empty($datas)){ $this->_view  = 'articles/articles';
-                                    //$this->_datas=$modelPosts->articles();
+                /*if (empty($datas)){ $this->_view  = 'articles/articles';
+                                    $this->_datas=$modelPosts->articles();
                                 $this->_datas = $this->_datas['article']->fetch_array();
                 }  else {
                     $this->_datas = $this->_datas['article']->fetch_array();
 -                   $this->_datas = $datas;
 
-                }
+                }*/
                 break;
             default :
                 $modelPosts->articles();
