@@ -24,9 +24,7 @@ class Controller extends ControllerCommon{
 
                 $this->_view = 'articles/article_form';
                 $this->_datas=$modelPosts->show($this->_router);
-
-
-                 break;
+                break;
             case 'insert':
                 $this->_datas=$datas=$modelPosts->insert();
                 if (empty($datas)){ $this->_view  = 'articles/articles';

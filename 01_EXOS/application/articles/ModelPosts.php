@@ -71,15 +71,7 @@ class ModelPosts {
             }
 
             return $datas;
-var_dump($this->article($id ));
-
-
-
-
-
-
-
-
+//var_dump($this->article($id ));
 
         }else{
             $datas['formUrl'] = SITE_URL . '/articles/insert';
