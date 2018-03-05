@@ -17,8 +17,17 @@
             </ul>
                 </nav>
             <main>
-                <?php include SITE_PATH . '/view/'.$view.'.php'; ?>
+                <?php self::includeModule(Bootstrap::$page, Bootstrap::$action, Bootstrap::$router);?>
             </main>
+    
+          
+          
+          <footer>
+               <?php self::includeModule('contact', 'address');?>
+              <?php self::includeModule('menus', 'footer');?>
+            </footer> 
+            
+            
         </div>
     </body>
 </html>

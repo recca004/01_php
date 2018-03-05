@@ -13,10 +13,10 @@ class Bootstrap {
     public static $router;
 
     public static function url() {
-        $router = ( empty($_GET['page']) ) ? 'articles' : $_GET['page'];
-        if (!empty($router)) {
+        $router = ( empty($_GET['page']) ) ? '' : $_GET['page'];
+        {
             $parts = explode('/', $router);
-            self::$page = ( isset($parts[0]) ) ? $parts[0] : '';
+            self::$page = (!empty($parts[0]) ) ? $parts[0] : 'articles';
             self::$action = ( isset($parts[1]) ) ? $parts[1] : '';
             self::$router = ( isset($parts[2]) ) ? $parts[2] : '';
         }

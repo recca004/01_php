@@ -1,5 +1,13 @@
 <?php
 
+namespace application\articles;
+
+include_once SITE_PATH . '/application/articles/ModelPosts.php';
+
+use application\articles\ModelPosts;
+use includes\commons\ControllerCommon;
+use includes\Db;
+
 /**
  * Page article 
  */
@@ -7,214 +15,45 @@ class Controller extends ControllerCommon {
 
     protected function _setDatas() {
 
+
+        $modelPosts = new modelPosts;
+
         switch ($this->_action) {
             case 'detail':
-                $this->_article();
+                $this->_view = 'articles/articles_detail';
+                $this->_datas = $modelPosts->article();
                 break;
             case 'show':
-                $this->_show();
-                
-                $this->_formUrl();
+                $modelPosts->show();
+                $this->_datas = $modelPosts->show($this_router);
+                $this->_view = 'articles/articles_form';
+
+                $modelPosts->formUrl();
                 break;
+            
             case 'insert':
-                $this->_insert();
+                $datas = $modelPosts->insert();
                 break;
             case 'del':
-                $this->_del();
-                break;
+                $modelPosts->del();
+                $this->_datas = $modelPosts->articles();
+
+                $this->_view = 'articles/articles';
+                ;
+
+
             case 'update':
-                $this->_update();
+                $modelPosts->update();
+                 $this->_view = 'articles/articles';
+            $this->_datas = $datas;
                 break;
             default :
-                $this->_articles();
+
+                $this->_datas = $modelPosts->articles();
+
+                $this->_view = 'articles/articles';
                 break;
         }
     }
 
-    private function _articles() {
-        $datas = array();
-
-        $db = Db::connect();
-
-        $results = $db->query('SELECT * FROM articles');
-
-        if (!$db->errno && $results->num_rows > 0) {
-            $datas['articles'] = $results;
-        }
-
-        $this->_view = 'articles/articles';
-        $this->_datas = $datas;
-    }
-
-    private function _article() {
-
-        $id = $this->_router;
-        $datas = array();
-
-        $db = Db::connect();
-
-        $results = $db->query('SELECT * FROM articles WHERE IdArticle = \'' . $db->real_escape_string($id) . '\'');
-
-        if (!$db->errno && $results->num_rows > 0) {
-            $datas['article'] = $results;
-        }
-
-        $this->_view = 'articles/article_detail';
-
-        $this->_datas = $datas;
-    }
-
-    private function _show(){
-        
-        
-        if (!empty($this->_router)&& is_numeric($this->_router))
-            {
-            $this->_article($this->_router);
-            }
-            $this->_view = 'articles/article_form';
-          
-    }
-           
-        
-        
-    
-
-        private function _insert() {
-        $datas = $_POST;
-        
-         
-        
-        if (empty($datas['TitleArticle'])) {
-            $datas['error']['titleempty'] = true;
-        }
-        if (empty($datas['IntroArticle'])) {
-            $datas['error']['introempty'] = true;
-        }
-        if (empty($datas['ContentArticle'])) {
-            $datas['error']['contentempty'] = true;
-        }
-        if
-        (isset($datas ['error'])) {
-            $this->_view = 'articles/article_form';
-            $this->_datas = $datas;
-            return FALSE;
-        }
-
-
-
-        $db = Db::connect();
-
-
-        $TitleArticle = $db->real_escape_string($datas['TitleArticle']);
-        $IntroArticle = $db->real_escape_string($datas['IntroArticle']);
-        $ContentArticle = $db->real_escape_string($datas['ContentArticle']);
-
-
-        $query = 'INSERT INTO articles VALUES(NULL, \'' . $TitleArticle . '\', \'' . $IntroArticle . '\', \'' . $ContentArticle . '\')';
-        $db->query($query);
-
-        if ($db->errno) {
-
-            $this->_view = 'articles/article_form';
-            $this->_datas = $datas;
-        }
-
-        $this->_view = 'articles/articles';
-        $this->_articles();
-
-//        $this->_view  = 'articles/article_form';
-    }
-
-    private function _del() {
-
-        $db = Db::connect();
-        $id = $db->real_escape_string($this->_router);
-        $query = 'DELETE FROM articles WHERE IdArticle =' . $id;
-        $db->query($query);
-
-        // if( $db->errno){
-        //        $this->_view  = 'articles/article_form';
-        //        $this->_datas= $datas;
-        //        return;
-        // }
-        $this->_view = 'articles/articles';
-        $this->_articles();
-    }
-
-    private function _update() {
-
-        $datas = $_POST;
-
-        if (empty($this->_router)&& !is_numeric($this->_router)) 
-            {
-
-
-            $this->_view = 'articles/articles';
-            $this->_datas = $datas;
-            return;
-        }
-
-        if (empty($datas['TitleArticle'])) {
-            $datas['error']['titleempty'] = true;
-        }
-        if (empty($datas['IntroArticle'])) {
-            $datas['error']['introempty'] = true;
-        }
-        if (empty($datas['ContentArticle'])) {
-            $datas['error']['contentempty'] = true;
-        }
-        if(isset($datas ['error'])) {
-            $this->_view = 'articles/article_form';
-            $this->_datas = $datas;
-            return FALSE;
-        }
-
-        $db = Db::connect();
-
-        $TitleArticle = $db->real_escape_string($datas['TitleArticle']);
-        $IntroArticle = $db->real_escape_string($datas['IntroArticle']);
-        $ContentArticle = $db->real_escape_string($datas['ContentArticle']);
-
-
-        $query = 'UPDATE articles SET '
-                . 'TitleArticle = \'' . $TitleArticle . '\' ,'
-                . 'IntroArticle = \'' . $IntroArticle . '\','
-                . 'ContentArticle = \'' . $ContentArticle . '\' '
-                . 'WHERE IdArticle = ' . $this->_router;
-
-        $db->query($query);
-          $this->_articles();
-        $this->_view = 'articles/articles';
-        return FALSE;
-    }
-
-
-
-    
-    private function _formUrl() 
-            {
-        
-        if ( !empty( $this->_router))
-    
-        
-    
-    
-    {
-            
-            $this->_datas = $this->_datas['article']->fetch_array();
-    $this->_datas['formUrl'] = SITE_URL.'/articles/update/'. $this->_router;
-            
-           
-    }
-    
-    else 
-        
-
-    {
-        $this->_datas['formUrl'] = SITE_URL.'/articles/insert/';
-                
-    }
-            }
-            
-            
 }

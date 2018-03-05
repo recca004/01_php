@@ -1,5 +1,7 @@
 <?php
 
+namespace includes\commons;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,6 +14,7 @@
  * @author Mario Neita
  */
 class ControllerCommon {
+
     //put your code here
 
     protected $_page;
@@ -19,21 +22,20 @@ class ControllerCommon {
     protected $router;
     protected $_view;
     protected $_datas;
-        
-    
-    public function __construct($page, $action, $router){
-        $this->_page=$page;
-        $this->_action=$action;
-        $this->_router=$router;
-           $this->_setDatas();
+
+    public function __construct($page, $action, $router) {
+        $this->_page = $page;
+        $this->_action = $action;
+        $this->_router = $router;
+        $this->_setDatas();
     }
-    
-    
-    
-    public function get_datas(){
+
+    public function get_datas() {
         return $this->_datas;
     }
-    public function get_view(){
+
+    public function get_view() {
         return $this->_view;
     }
+
 }

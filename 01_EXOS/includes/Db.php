@@ -1,4 +1,9 @@
 <?php
+
+namespace includes;
+
+use mysqli;
+
 Class Db{
     
     private static $_connect;

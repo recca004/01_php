@@ -1,25 +1,30 @@
 <?php
+
+namespace application\contact;
+
+use includes\commons\ControllerCommon;
+
 /**
  * Page contact 
  */
-class Controller extends ControllerCommon{
+class Controller extends ControllerCommon {
 
+    protected function _setDatas() {
 
-    
-    protected function _setDatas(){
-        
-        switch ($this->_action){
+        switch ($this->_action) {
             case 'send':
                 $this->_checkMessageSent();
                 break;
-                
+            case 'address':
+                $this->_view = 'contact/address';
+                break;
             default :
                 $this->_view = 'contact/contact';
 
                 break;
         }
     }
-    
+
     /**
      * Vérifie les champs du formulaire et envoi si aucune erreur n'est trouvée
      * @param string $action 
@@ -27,55 +32,36 @@ class Controller extends ControllerCommon{
      * 
      * 
      */
-     
-    private function _checkMessageSent()
-    {
+    private function _checkMessageSent() {
         $datas = array();
 
-        if($this->_action === 'send' )
-        {
+        if ($this->_action === 'send') {
             $datas = $_POST;
 
-            if( empty( $_POST[ 'email' ] ) )
-            {
-                $datas[ 'error' ][ 'emailempty' ] = true;
-            }
-            else if( !filter_var( $_POST[ 'email' ], FILTER_VALIDATE_EMAIL ) )
-            {
-                $datas[ 'error' ][ 'emailformat' ] = true;
+            if (empty($_POST['email'])) {
+                $datas['error']['emailempty'] = true;
+            } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $datas['error']['emailformat'] = true;
             }
 
-            if( empty( $_POST[ 'message' ] ) )
-            {
-                $datas[ 'error' ][ 'messageempty' ] = true;
-
+            if (empty($_POST['message'])) {
+                $datas['error']['messageempty'] = true;
             }
 
-            if( !isset( $datas[ 'error' ] ) )
-            {
-             //send message by mail
-              mail( 'bobunae@gmail.com', 'Subject', $datas[ 'message' ], 'From:'.$datas[ 'email' ] );
+            if (!isset($datas['error'])) {
+                //send message by mail
+                mail('bobunae@gmail.com', 'Subject', $datas['message'], 'From:' . $datas['email']);
 
                 $this->_view = 'contact/contact_sent';
+            } else {
+                $this->_view = 'contact/contact';
             }
-            else
-            {
-                $this->_view  = 'contact/contact';
-            }
-        }
-        else
-        {
-            $this->_view  = 'contact/contact';
+        } else {
+            $this->_view = 'contact/contact';
         }
 
 
-        $this->_datas=$datas;
+        $this->_datas = $datas;
     }
-    
 
 }
-    
-    
-    
-    
-   
