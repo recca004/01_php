@@ -21,7 +21,7 @@ class Controller extends ControllerCommon {
         switch ($this->_action) {
             case 'detail':
                 $this->_view = 'articles/articles_detail';
-                $this->_datas = $modelPosts->article();
+                $this->_datas = $modelPosts->$this_router;
                 break;
             case 'show':
                 $modelPosts->show();
@@ -39,8 +39,7 @@ class Controller extends ControllerCommon {
                 $this->_datas = $modelPosts->articles();
 
                 $this->_view = 'articles/articles';
-                ;
-
+           
 
             case 'update':
                 $modelPosts->update();

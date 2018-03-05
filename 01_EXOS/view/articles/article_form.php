@@ -13,6 +13,13 @@ if (isset($datas['article']))
     
     echo '<pre>',var_dump($datas),'</pre>';
 }*/
+
+
+
+if( isset( $datas[ 'article' ] ) )
+{
+    $row = $datas[ 'article' ]->fetch_array();
+
 ?>
 
 
@@ -31,9 +38,12 @@ if (isset($datas['article']))
     
     <label for="ContentArticle">
         <?php echo ( isset( $datas[ 'error' ][ 'contentempty' ] ) ) ? '<span class="alert">Aucun contenu n\'a été indiqué.</span><br />' : ''; ?>
-        <textarea id="ContentArticle" name="ContentArticle" placeholder="Contenu principal de l'article"><?php echo ( isset( $datas['ContentArticle'] ) ) ? $datas['ContentArticle'] : ''; ?></textarea>
+        <textarea id="ContentArticle" name="ContentArticle" placeholder="Contenu principal de l'article"><?php echo ( isset( $datas['ContentArticle'] ) ) ? 
+        $datas['ContentArticle'] : ''; ?></textarea>
     </label>
     
     <button class="btn">Envoyer</button>
     
 </form>
+<?php
+?>

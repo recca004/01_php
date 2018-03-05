@@ -21,9 +21,9 @@ class ModelPosts {
         $this->_datas = $datas;
     }
 
-    public function article() {
+    public function article($id) {
 
-        $id = $this->_router;
+       /* $id = $this->_router;*/
         $datas = array();
 
         $db = Db::connect();
@@ -41,12 +41,13 @@ class ModelPosts {
     }
 
     public function show($id) {
-
+$datass=[];
 
         if (!empty($id) && is_numeric($id)) {
-            $this->_article($id); {
+            $this->_article($id);
+            {
 
-                $datas['article']->fetch_array();
+               /* $datas['article']->fetch_array();*/
                 $datas['formUrl'] = SITE_URL . '/articles/update/' . $id;
             }
         } else {
@@ -55,7 +56,7 @@ class ModelPosts {
         return $datas;
     }
 
-    public function insert() {
+    public function insert($id) {
         $datas = $_POST;
 
 
@@ -98,7 +99,7 @@ class ModelPosts {
 //        $this->_view  = 'articles/article_form';
     }
 
-    public function del() {
+    public function del($idArticle) {
 
         $db = Db::connect();
         $id = $db->real_escape_string($this->_router);
@@ -114,7 +115,7 @@ class ModelPosts {
         $this->_articles();
     }
 
-    public function update() {
+    public function update($id) {
 
         $datas = $_POST;
 
