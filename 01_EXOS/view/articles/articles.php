@@ -1,9 +1,5 @@
 <h1>Articles</h1>
-<<<<<<< HEAD
 <a href="<?php echo SITE_URL; ?>/articles/show">Ajouter un article</a>
-=======
-<a href="<?php echo SITE_URL; ?>/index.php?page=articles&action=show">Ajouter un article</a>
->>>>>>> atelier2
 <?php 
 if( isset( $datas[ 'articles' ] ) )
 {
