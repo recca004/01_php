@@ -24,9 +24,11 @@ class Controller extends ControllerCommon{
 
                 $this->_view = 'articles/article_form';
                 $this->_datas=$modelPosts->show($this->_router);
+                
                 break;
             case 'insert':
-                $this->_datas=$datas=$modelPosts->insert();
+                //$this->_datas=$datas=$modelPosts->insert();
+                $datas=$modelPosts->insert();
                 if (empty($datas)){ $this->_view  = 'articles/articles';
                                     $this->_datas=$modelPosts->articles();
                 }  else {
@@ -39,18 +41,22 @@ class Controller extends ControllerCommon{
                 $this->_datas=$modelPosts->del($this->_router);
                 $this->_datas = $modelPosts->articles();
                 $this->_view  = 'articles/articles';
+
                 break;
             case 'update':
+               // $datas=$modelPosts->update($this->_router);
                 $this->_datas=$modelPosts->update($this->_router);
-                /*if (empty($datas)){ $this->_view  = 'articles/articles';
+                
+                if (empty($datas)){ $this->_view  = 'articles/article_form';
                                     $this->_datas=$modelPosts->articles();
-                                $this->_datas = $this->_datas['article']->fetch_array();
-                }  else {
-                    $this->_datas = $this->_datas['article']->fetch_array();
--                   $this->_datas = $datas;
-
-                }*/
+                               //$this->_datas = $datas;
+                                  }else{
+                $this->_datas=$modelPosts->update($this->_router);
+                $this->_view  = 'articles/articles';
+        }
+               echo 'HEllo' ;
                 break;
+                
             default :
                 $modelPosts->articles();
                 $this->_datas = $modelPosts->articles();

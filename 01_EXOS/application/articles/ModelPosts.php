@@ -71,7 +71,7 @@ class ModelPosts {
             }
 
             return $datas;
-//var_dump($this->article($id ));
+
 
         }else{
             $datas['formUrl'] = SITE_URL . '/articles/insert';
@@ -133,7 +133,8 @@ class ModelPosts {
 
         if ( empty( $id ) && !is_numeric($id) )
         {
-            return $datas;
+            $this->_datas = $datas;
+        return;
         }
 
 
@@ -150,7 +151,8 @@ class ModelPosts {
 
         if ( isset( $datas[ 'error' ] ) )
         {
-            return $datas;
+            $this->_datas = $datas;
+        return;
         }
 
         $db = Db::connect();
@@ -167,6 +169,7 @@ class ModelPosts {
 
 
         $db->query($query);
+        
 
      }
 
