@@ -19,7 +19,7 @@ class ControllerCommon {
 
     protected $_page;
     protected $_action;
-    protected $router;
+    protected $_router;
     protected $_view;
     protected $_datas;
 

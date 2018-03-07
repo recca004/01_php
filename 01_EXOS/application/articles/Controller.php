@@ -16,35 +16,53 @@ class Controller extends ControllerCommon {
     protected function _setDatas() {
 
 
-        $modelPosts = new modelPosts;
+        $modelPosts = new ModelPosts;
 
         switch ($this->_action) {
             case 'detail':
                 $this->_view = 'articles/articles_detail';
-                $this->_datas = $modelPosts->$this_router;
+                $this->_datas = $modelPosts->article($this->_router);
                 break;
-            case 'show':
-                $modelPosts->show();
-                $this->_datas = $modelPosts->show($this_router);
-                $this->_view = 'articles/articles_form';
 
-                $modelPosts->formUrl();
+            case 'show':
+
+                $this->_datas = $modelPosts->show($this->_router);
+                $this->_view = 'articles/article_form';
                 break;
-            
+
             case 'insert':
-                $datas = $modelPosts->insert();
+                $this->_datas = $modelPosts->insert();
+                if (empty($this->_datas)) {
+                    header('location:' . SITE_URL . '/ARTICLES');
+                    //  $this->_view = 'articles/articles';
+                    // $this->_datas = $modelPosts->articles();
+                } else {
+                    $this->_view = 'articles/article_form';
+                }
+
                 break;
+                
             case 'del':
                 $modelPosts->del();
                 $this->_datas = $modelPosts->articles();
 
                 $this->_view = 'articles/articles';
-           
+
 
             case 'update':
-                $modelPosts->update();
-                 $this->_view = 'articles/articles';
-            $this->_datas = $datas;
+                
+                $modelPosts->update($this->_router);
+                $this->_view = 'articles/articles';
+                $this->_datas = $datas;
+                
+                if (empty($this->_datas)) {
+                    header('location:' . SITE_URL . '/ARTICLES');
+                    //  $this->_view = 'articles/articles';
+                    // $this->_datas = $modelPosts->articles();
+                } else {
+                    $this->_view = 'articles/article_form';
+                }
+                
                 break;
             default :
 

@@ -11,14 +11,14 @@ class ModelPosts {
 
         $db = Db::connect();
 
-        $results = $db->query('SELECT * FROM articles');
+        $results = $db->query('SELECT * FROM articles ORDER BY IdArticle ASC');
 
         if (!$db->errno && $results->num_rows > 0) {
             $datas['articles'] = $results;
         }
 
 
-        $this->_datas = $datas;
+        return $datas;
     }
 
     public function article($id) {
@@ -44,11 +44,14 @@ class ModelPosts {
 $datass=[];
 
         if (!empty($id) && is_numeric($id)) {
-            $this->_article($id);
+            $this->article($id);
             {
 
                /* $datas['article']->fetch_array();*/
+                 $datas = $this->article($id);
                 $datas['formUrl'] = SITE_URL . '/articles/update/' . $id;
+               
+                var_dump($datas);
             }
         } else {
             $datas['formUrl'] = SITE_URL . '/articles/insert/';
@@ -56,7 +59,7 @@ $datass=[];
         return $datas;
     }
 
-    public function insert($id) {
+    public function insert() {
         $datas = $_POST;
 
 
@@ -94,12 +97,12 @@ $datass=[];
         }
 
         $this->_view = 'articles/articles';
-        $this->_articles();
+        $this->articles();
 
 //        $this->_view  = 'articles/article_form';
     }
 
-    public function del($idArticle) {
+    public function del() {
 
         $db = Db::connect();
         $id = $db->real_escape_string($this->_router);
@@ -112,7 +115,7 @@ $datass=[];
         //        return;
         // }
         $this->_view = 'articles/articles';
-        $this->_articles();
+        $this->articles();
     }
 
     public function update($id) {
@@ -151,7 +154,7 @@ $datass=[];
                 . 'TitleArticle = \'' . $TitleArticle . '\' ,'
                 . 'IntroArticle = \'' . $IntroArticle . '\','
                 . 'ContentArticle = \'' . $ContentArticle . '\' '
-                . 'WHERE IdArticle = ' . $this->_router;
+                . 'WHERE IdArticle = ' . $id;
 
         $db->query($query);
     }
