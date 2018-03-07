@@ -12,7 +12,7 @@ class ModelPosts {
 
         $db = Db::connect();
 
-        $results = $db->query( 'SELECT * FROM articles' );
+        $results = $db->query( 'SELECT * FROM articles ORDER BY TitleArticle ASC' );
 
         if( !$db->errno && $results->num_rows > 0 )
         {
@@ -24,9 +24,9 @@ class ModelPosts {
     }
 
 
-    public function article()
+    public function article( $id )
     {
-        $id = $this->_router;
+        //$id = $this->_router;
         
         $datas = array();
 
@@ -38,7 +38,7 @@ class ModelPosts {
         {
             $datas[ 'article' ] = $results;
         }
-var_dump($this->_router);
+
         return $datas;
     }
     
@@ -46,14 +46,12 @@ var_dump($this->_router);
     public function show( $id )
     {
         $datas = [];
+
         
         if ( !empty( $id ) && is_numeric( $id ) )
         {
-            $article = $this->article( $id );
-            
-            $datas = $article->fetch_array();
-
-            $datas['formUrl'] = SITE_URL . '/articles/update/' . $id;          
+            $datas = $this->article( $id );
+            $datas['formUrl'] = SITE_URL . '/articles/update/' . $id; 
         }
         else
         {

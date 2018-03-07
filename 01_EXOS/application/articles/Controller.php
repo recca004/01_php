@@ -17,7 +17,7 @@ class Controller extends ControllerCommon{
         
         switch ($this->_action){
             case 'detail':
-                $this->_datas = $modelPosts->article();
+                $this->_datas = $modelPosts->article( $this->_router );
                 $this->_view  = 'articles/article_detail';
                 break;
             case 'show':
@@ -29,8 +29,10 @@ class Controller extends ControllerCommon{
                 $datas = $modelPosts->insert();
                 if( empty( $datas ) )
                 {
-                    $this->_view  = 'articles/articles';
-                    $this->_datas = $modelPosts->articles();
+                    /* header pour rediriger sur la page des articles, quand l'ajout s'est déroulé correctement
+                     * afin d'éviter de rajouter le même article en cas de rechargement de la page
+                     */
+                    header('location:'.SITE_URL.'/articles');
                 }
                 else
                 {
@@ -49,8 +51,7 @@ class Controller extends ControllerCommon{
                 $datas = $modelPosts->update( $this->_router );
                 if( empty( $datas ) )
                 {
-                    $this->_view  = 'articles/articles';
-                    $this->_datas = $modelPosts->articles();
+                    header('location:'.SITE_URL.'/articles');
                 }
                 else
                 {
