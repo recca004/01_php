@@ -56,22 +56,8 @@ class ModelPosts {
         if ( !empty($id) && is_numeric($id) )
         {
 
-            //$article->fetch_array();
-
+            $datas=  $this->article($id);
             $datas['formUrl'] = SITE_URL . '/articles/update/' . $id;
-
-
-
-        $db = Db::connect();
-            $results = $db->query( 'SELECT * FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
-
-            if( !$db->errno && $results->num_rows > 0 )
-            {
-                $datas[ 'article' ] = $results;
-            }
-
-            return $datas;
-
 
         }else{
             $datas['formUrl'] = SITE_URL . '/articles/insert';
@@ -111,7 +97,7 @@ class ModelPosts {
 
         if( $db->errno )
         {
-            die("ERREUR lors du indert");
+            die("ERREUR lors du insert");
             return false;
         }
 
